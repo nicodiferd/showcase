@@ -1,0 +1,32 @@
+/* Vibrant & Playful */
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #ff4081;
+  }
+  .intro-section {
+    background-color: #ffecb3;
+    padding: 4rem 0;
+    text-align: center;
+  }
+  .intro-section img {
+    max-width: 180px;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+    border: 5px solid #ff4081;
+  }
+  .section-title {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-weight: bold;
+    color: #ff4081;
+  }
+  footer {
+    background-color: #ffecb3;
+    padding: 2rem 0;
+    text-align: center;
+    color: #ff4081;
+    border-top: 2px solid #ff4081;
+  }
+  
