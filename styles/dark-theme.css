@@ -1,39 +1,61 @@
-/* Dark Theme */
+/* dark-theme.css */
+
 body {
     background-color: #121212;
     color: #e0e0e0;
     font-family: 'Helvetica Neue', Arial, sans-serif;
   }
+  
+  /* Navbar */
+  .navbar, .navbar-light.bg-light {
+    background-color: #1f1f1f !important;
+  }
+  .nav-link {
+    color: #e0e0e0 !important;
+  }
+  .nav-link:hover {
+    color: #ffffff !important;
+  }
   .navbar-brand {
-    font-weight: bold;
-    color: #ffffff;
+    color: #ffffff !important;
   }
+  
+  /* Intro Section */
   .intro-section {
-    background-color: #1e1e1e;
-    padding: 4rem 0;
+    background-color: #1f1f1f;
     text-align: center;
   }
-  .intro-section img {
-    max-width: 200px;
-    border-radius: 50%;
-    margin-bottom: 1rem;
-    border: 3px solid #333;
+  
+  /* Cards */
+  .card {
+    background-color: #2a2a2a;
+    color: #e0e0e0;
   }
-  .section-title {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-    text-align: center;
-    font-weight: 600;
-    color: #f5f5f5;
+  .card .card-title {
+    color: #fff;
   }
+  .card a.btn {
+    background-color: #444;
+    color: #fff;
+  }
+  .card a.btn:hover {
+    background-color: #555;
+  }
+  
+  /* Footer */
   footer {
-    background-color: #1e1e1e;
-    padding: 2rem 0;
-    text-align: center;
+    background-color: #1f1f1f;
     border-top: 1px solid #333;
   }
-  a, a:hover, a:visited {
-    color: #03dac6; /* teal accent */
-    text-decoration: none;
+  footer a {
+    color: #03dac6;
+  }
+  footer a:hover {
+    color: #00f7bb;
+  }
+  
+  /* Recolor heading styles if needed */
+  .section-title {
+    color: #f5f5f5;
   }
   
