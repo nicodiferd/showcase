@@ -70,8 +70,11 @@
       >
         <span class="navbar-toggler-icon">☰</span>
       </button>
+  
+      <!-- Collapse -->
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
+          <!-- Existing nav items -->
           <li class="nav-item">
             <a class="nav-link" href="#about">About Me</a>
           </li>
@@ -87,10 +90,21 @@
           <li class="nav-item">
             <a class="nav-link" href="#contact">Contact</a>
           </li>
+  
+          <!-- NEW list item for the theme selector -->
+          <li class="nav-item ms-3">
+            <select id="themeSelector" class="form-select form-select-sm">
+              <option value="styles/minimal-clean.css">Minimal (Default)</option>
+              <option value="styles/dark-theme.css">Dark</option>
+              <option value="styles/vibrant-playful.css">Vibrant</option>
+              <option value="styles/gradient-theme.css">Gradient</option>
+            </select>
+          </li>
         </ul>
       </div>
     </div>
   </nav>
+  
   
   <!-- ============================== HOME SECTION =============================== -->
   <section id="home" class="intro-section">
