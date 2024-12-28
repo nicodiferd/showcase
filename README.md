@@ -1,2 +1,2 @@
-# nicolo.org
+# nicolod.org
 Personal website
