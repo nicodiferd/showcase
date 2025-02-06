@@ -1,3 +1,7 @@
-/*.pdf
+/public/*.pdf
+  Content-Type: application/pdf
+  Content-Disposition: inline
+
+/resume.pdf
   Content-Type: application/pdf
   Content-Disposition: inline 
