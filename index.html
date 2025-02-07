@@ -45,13 +45,120 @@
       text-align: center;
     }
     footer {
-      background-color: #f8f9fa;
       padding: 2rem 0;
       text-align: center;
     }
     /* Example custom class if you want a special style on a second image */
     .my-profile-pic {
       border: 3px solid #333;
+    }
+
+    /* Dark theme specific styles */
+    [data-bs-theme="dark"] footer,
+    .dark-theme footer {
+      background-color: #212529;
+      color: #fff;
+    }
+
+    [data-bs-theme="dark"] footer a,
+    .dark-theme footer a {
+      color: #0d6efd;
+      text-decoration: none;
+    }
+
+    [data-bs-theme="dark"] footer a:hover,
+    .dark-theme footer a:hover {
+      color: #0b5ed7;
+      text-decoration: underline;
+    }
+
+    /* Light theme specific styles */
+    footer {
+      background-color: #f8f9fa;
+      color: #212529;
+    }
+
+    footer a {
+      color: #0d6efd;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: #0b5ed7;
+      text-decoration: underline;
+    }
+
+    /* Dark theme footer styles - making them more specific */
+    footer.theme-responsive {
+        background-color: #1a1a1a !important;  /* Darker background */
+        color: #ffffff !important;             /* White text */
+        padding: 2rem 0;
+        text-align: center;
+        border-top: 1px solid #333;           /* Subtle border */
+    }
+
+    footer.theme-responsive a {
+        color: #66b3ff !important;            /* Brighter blue for links */
+        text-decoration: none;
+        margin: 0 10px;                       /* Space between links */
+        transition: color 0.3s ease;          /* Smooth hover effect */
+    }
+
+    footer.theme-responsive a:hover {
+        color: #99ccff !important;            /* Lighter blue on hover */
+        text-decoration: underline;
+    }
+
+    footer.theme-responsive p {
+        margin: 0.5rem 0;                     /* Spacing between paragraphs */
+        font-size: 1rem;                      /* Clear text size */
+        opacity: 0.9;                         /* Slight transparency */
+    }
+
+    /* Remove the conflicting light theme styles */
+    footer {
+        padding: 2rem 0;
+        text-align: center;
+    }
+
+    /* Section dividers */
+    section:not(:last-of-type) {
+        border-bottom: 1px solid #dee2e6;
+        margin-bottom: 2rem;
+    }
+
+    /* Dark theme section dividers */
+    [data-bs-theme="dark"] section:not(:last-of-type),
+    .dark-theme section:not(:last-of-type) {
+        border-bottom: 1px solid #333;
+    }
+
+    /* Add some padding to sections for better spacing */
+    section {
+        padding: 4rem 0;
+    }
+
+    /* Adjust intro section padding */
+    .intro-section {
+        padding: 4rem 0;
+        margin-bottom: 0;
+    }
+
+    /* Container shadow for better section definition */
+    .container {
+        position: relative;
+    }
+
+    /* Section hover effect for better interactivity */
+    section:hover {
+        background-color: rgba(0, 0, 0, 0.02);
+        transition: background-color 0.3s ease;
+    }
+
+    /* Dark theme hover effect */
+    [data-bs-theme="dark"] section:hover,
+    .dark-theme section:hover {
+        background-color: rgba(255, 255, 255, 0.02);
     }
   </style>
 </head>
@@ -115,9 +222,9 @@
         alt="My Photo"
         class="my-profile-pic"
       />
-      <h1 class="mt-3">Hi, I'm Nicolo DiFerdinando</h1>
+      <h1 class="mt-3">Hello! and welcome to my website!</h1>
       <p class="lead">
-        I'm a 22-year-old <strong>Cybersecurity</strong> student at <strong>Cal Poly San Luis Obispo</strong>.
+       My name is Nicolo DiFerdinando, and I'm a 22-year-old <strong>Cybersecurity</strong> student at <strong>Cal Poly San Luis Obispo</strong>.
       </p>
       <p>
         Passionate about Technology, Innovation, and Creativity. 
@@ -162,7 +269,7 @@
       <div class="col-md-4 mb-4">
         <div class="card">
           <img
-            src="images/Ipblocklist.png"
+            src="images/IPblocklist image.jpg"
             class="card-img-top"
             alt="Project 1"
           />
@@ -182,15 +289,14 @@
       <div class="col-md-4 mb-4">
         <div class="card">
           <img
-            src="https://via.placeholder.com/400x200"
+            src="images/Select and Collect cards.png"
             class="card-img-top"
             alt="Project 2"
           />
           <div class="card-body">
-            <h5 class="card-title">Web Vulnerability Scanner</h5>
+            <h5 class="card-title">Select and Collect Cards Trading Databse</h5>
             <p class="card-text">
-              A proof-of-concept web application vulnerability scanner written in Go, 
-              focusing on SQL injection and XSS detection.
+              A complete database for a card trading store that I designed and built with a group of classmates.
             </p>
             <a href="https://github.com/nicodiferd/Web-Vulnerability-Scanner.git" target="_blank" rel="noopener noreferrer" class="btn btn-primary">View on GitHub</a>
 
@@ -287,12 +393,12 @@
   </section>
 
   <!-- ================================= FOOTER ================================= -->
-  <footer>
+  <footer class="theme-responsive">
     <div class="container">
       <p>© 2024 Nicolo DiFerdinando | Cal Poly San Luis Obispo</p>
       <p>
-        <a href="https://github.com/nicodiferd" target="_blank">GitHub</a> |
-        <a href="https://www.linkedin.com/in/nicolo-diferdinando/" target="_blank">LinkedIn</a> |
+        <a href="https://github.com/nicodiferd" target="_blank" rel="noopener noreferrer">GitHub</a> |
+        <a href="https://www.linkedin.com/in/nicolo-diferdinando/" target="_blank" rel="noopener noreferrer">LinkedIn</a> |
         <a href="mailto:nicodiferd@gmail.com">Email</a>
       </p>
     </div>
