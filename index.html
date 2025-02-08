@@ -23,7 +23,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   />
 
   <!-- Optional: Theme-based stylesheet (uncomment or change the path if you plan to swap themes) -->
-  <link id="theme-link" rel="stylesheet" href="styles/minimal-clean.css" /> 
+  <link id="theme-link" rel="stylesheet" href="styles/dark-theme.css" /> 
   
   <!-- Your custom CSS -->
   <link rel="stylesheet" href="style.css" />
@@ -453,6 +453,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             // Network error message
             alert('There was a network error. Please try again later.');
         });
+    });
+
+    // Function to set theme preference in localStorage
+    function setThemePreference(theme) {
+        localStorage.setItem('themePreference', theme);
+        document.getElementById('themeSelector').value = theme;
+    }
+
+    // Check for saved theme preference or set dark theme as default
+    window.addEventListener('load', function() {
+        const savedTheme = localStorage.getItem('themePreference') || 'styles/dark-theme.css';
+        document.getElementById('theme-link').href = savedTheme;
+        document.getElementById('themeSelector').value = savedTheme;
+    });
+
+    // Update your existing theme selector event listener
+    document.getElementById('themeSelector').addEventListener('change', function() {
+        const theme = this.value;
+        document.getElementById('theme-link').href = theme;
+        setThemePreference(theme);
     });
   </script>
 </body>
