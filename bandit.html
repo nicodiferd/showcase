@@ -63,6 +63,24 @@
       background-color: var(--brown);
       color: var(--white);
       border-color: var(--pink);
+      height: 100%;
+    }
+    
+    .card-body {
+      display: flex;
+      flex-direction: column;
+      border-top: 2px solid var(--pink);
+    }
+    
+    .card-text {
+      flex-grow: 1;
+    }
+    
+    .card-img-top {
+      height: 220px;
+      object-fit: contain;
+      padding: 20px;
+      background-color: var(--black);
     }
     
     .logo-container {
@@ -80,6 +98,16 @@
       overflow: hidden;
       box-shadow: 0 5px 15px rgba(0,0,0,0.3);
       border: 1px solid var(--pink);
+    }
+    
+    .equal-height-row {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    
+    .equal-height-row > [class*='col-'] {
+      display: flex;
+      flex-direction: column;
     }
   </style>
 </head>
@@ -123,9 +151,9 @@
       </div>
     </div>
     
-    <div class="row mb-5">
+    <div class="row equal-height-row mb-5">
       <div class="col-md-4 mb-4">
-        <div class="card h-100">
+        <div class="card">
           <div class="card-body">
             <h4 class="card-title" style="color: var(--pink);">Our Mission</h4>
             <p class="card-text">
@@ -137,7 +165,7 @@
       </div>
       
       <div class="col-md-4 mb-4">
-        <div class="card h-100">
+        <div class="card">
           <div class="card-body">
             <h4 class="card-title" style="color: var(--pink);">Services</h4>
             <p class="card-text">
@@ -149,7 +177,7 @@
       </div>
       
       <div class="col-md-4 mb-4">
-        <div class="card h-100">
+        <div class="card">
           <div class="card-body">
             <h4 class="card-title" style="color: var(--pink);">Community</h4>
             <p class="card-text">
@@ -170,9 +198,9 @@
   <section class="container py-5">
     <h2 class="section-title">OUR WEBSITE</h2>
     
-    <div class="row align-items-center">
+    <div class="row equal-height-row align-items-stretch">
       <div class="col-md-6 mb-4">
-        <div class="card h-100">
+        <div class="card">
           <div class="card-body">
             <h4 class="card-title" style="color: var(--pink);">Schedule Your Ride</h4>
             <p class="card-text">
@@ -181,9 +209,9 @@
             <p class="card-text">
               We're the driving company for the thrifters and coffee lovers, the band players and house show dancers, the party hosts and study-night warriors. Bandit isn't just a driving service—we're a brand built for the college experience, by students, for students.
             </p>
-            <div class="text-center mt-4">
-              <a href="https://www.banditdrives.com/scheduling" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">
-                <i class="fas fa-calendar-check"></i> Schedule Your Ride!
+            <div class="text-center mt-auto">
+              <a href="https://www.banditdrives.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">
+                <i class="fas fa-globe"></i> Visit Our Website
               </a>
             </div>
           </div>
@@ -191,11 +219,16 @@
       </div>
       
       <div class="col-md-6 mb-4">
-        <div class="card h-100">
+        <div class="card">
           <div class="card-body">
             <h4 class="card-title" style="color: var(--pink);">Bandit</h4>
             <div class="website-preview mt-3">
-              <img src="images/Website Header.png" alt="Bandit Website Header" class="img-fluid" style="width: 100%; border-radius: 8px; border: 1px solid var(--pink);">
+              <img src="images/Website Header.png" alt="Bandit Website Header" class="img-fluid" style="width: 100%; border-radius: 8px; border: 2px solid var(--pink); background-color: var(--black);">
+            </div>
+            <div class="text-center mt-auto">
+              <a href="https://www.banditdrives.com/scheduling" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                <i class="fas fa-calendar-check"></i> Schedule Now!
+              </a>
             </div>
           </div>
         </div>
@@ -207,9 +240,9 @@
   <section class="container py-5">
     <h2 class="section-title">OUR VISION</h2>
     
-    <div class="row mb-5">
+    <div class="row equal-height-row">
       <div class="col-md-6 mb-4">
-        <div class="card h-100">
+        <div class="card">
           <div class="card-body">
             <h4 class="card-title" style="color: var(--pink);">Safety First</h4>
             <p class="card-text">
@@ -221,7 +254,7 @@
       </div>
       
       <div class="col-md-6 mb-4">
-        <div class="card h-100">
+        <div class="card">
           <div class="card-body">
             <h4 class="card-title" style="color: var(--pink);">More Than Just Rides</h4>
             <p class="card-text">

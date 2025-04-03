@@ -60,6 +60,37 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       border: 3px solid #333;
     }
 
+    /* Card equal height styles */
+    .card {
+      height: 100%;
+    }
+    
+    .card-body {
+      display: flex;
+      flex-direction: column;
+      border-top: 2px solid #495057;
+    }
+    
+    .card-text {
+      flex-grow: 1;
+    }
+    
+    .card-img-top {
+      height: 220px;
+      object-fit: contain;
+      padding: 20px;
+    }
+    
+    .equal-height-row {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    
+    .equal-height-row > [class*='col-'] {
+      display: flex;
+      flex-direction: column;
+    }
+
     /* Dark theme specific styles */
     [data-bs-theme="dark"] footer,
     .dark-theme footer {
@@ -278,7 +309,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- ============================= PROJECTS SECTION ============================ -->
   <section id="projects" class="container py-5">
     <h2 class="section-title">Projects</h2>
-    <div class="row">
+    <div class="row equal-height-row">
       <!-- Project 1 -->
       <div class="col-md-4 mb-4">
         <div class="card">
@@ -286,6 +317,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             src="images/IPblocklist image.jpg"
             class="card-img-top"
             alt="Project 1"
+            style="background-color: #dedac9;"
           />
           <div class="card-body">
             <h5 class="card-title">IP Blocklist Automation</h5>
@@ -293,8 +325,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               A custom-built tool using Python, slack and Splunk SOAR to automate the process of blocking or 
               evaluating suspicious IP addresses by SOC anaylysts in slack.
             </p>
-            <a href="https://github.com/nicodiferd/Ipblocklistautomation" target="_blank" rel="noopener noreferrer" class="btn btn-primary">View on GitHub</a>
-
+            <a href="https://github.com/nicodiferd/Ipblocklistautomation" target="_blank" rel="noopener noreferrer" class="btn btn-primary mt-auto">View on GitHub</a>
           </div>
         </div>
       </div>
@@ -306,14 +337,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             src="images/Select and Collect cards.png"
             class="card-img-top"
             alt="Project 2"
+            style="background-color: #f0f0ef;"
           />
           <div class="card-body">
             <h5 class="card-title">Select and Collect Cards Trading Databse</h5>
             <p class="card-text">
               A complete database for a card trading store that I designed and built with a group of classmates.
             </p>
-            <a href="https://github.com/nicodiferd/Web-Vulnerability-Scanner.git" target="_blank" rel="noopener noreferrer" class="btn btn-primary">View on GitHub</a>
-
+            <a href="https://github.com/nicodiferd/Web-Vulnerability-Scanner.git" target="_blank" rel="noopener noreferrer" class="btn btn-primary mt-auto">View on GitHub</a>
           </div>
         </div>
       </div>
@@ -322,16 +353,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="col-md-4 mb-4">
         <div class="card">
           <img
-            src="images/Bandit_Logo_Inverted.png"
+            src="images/Bandit Fancy.png"
             class="card-img-top"
             alt="Bandit Logo"
+            style="background-color: #212529;"
           />
           <div class="card-body">
             <h5 class="card-title">Bandit</h5>
             <p class="card-text">
               Transportation service in San Luis Obispo providing safe, reliable rides for students and young adults during nights out and special events. Bandit aims to reduce drunk driving by offering an affordable alternative to unpredictable rideshares while enhancing the social experience.
             </p>
-            <a href="bandit.html" class="btn btn-primary">See more!</a>
+            <a href="bandit.html" class="btn btn-primary mt-auto">See more!</a>
           </div>
         </div>
       </div>
