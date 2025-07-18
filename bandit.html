@@ -1,9 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bandit - San Luis Obispo</title>
+  <meta name="description" content="Bandit - Redefining transportation in San Luis Obispo with safe, reliable rides for students">
+  <title>Bandit - San Luis Obispo | Nicolo DiFerdinando</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/favicon.png">
   
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -13,296 +17,439 @@
   
   <!-- Main Stylesheet -->
   <link rel="stylesheet" href="styles/main.css">
+  
   <style>
-    :root {
-      --brown: rgb(86, 73, 62);
-      --pink: rgb(248, 189, 205);
-      --white: rgb(253, 241, 232);
-      --black: rgb(16, 16, 16);
-    }
-    
-    body {
-      background-color: var(--black);
-      color: var(--white);
-    }
-    
-    .navbar {
-      background-color: var(--black);
-    }
-    
-    .section-title {
-      color: var(--pink);
-      text-align: center;
-      margin-bottom: 2rem;
-      font-weight: bold;
-    }
-    
-    .btn-primary {
-      background-color: var(--brown);
-      border-color: var(--brown);
-    }
-    
-    .btn-primary:hover {
-      background-color: var(--pink);
-      border-color: var(--pink);
-      color: var(--black);
-    }
-    
-    footer {
-      background-color: var(--brown);
-      color: var(--white);
-      padding: 1.5rem 0;
-      text-align: center;
-    }
-    
-    footer a {
-      color: var(--pink);
-      text-decoration: none;
-    }
-    
-    footer a:hover {
-      color: var(--white);
-      text-decoration: underline;
-    }
-    
-    .card {
-      background-color: var(--brown);
-      color: var(--white);
-      border-color: var(--pink);
-      height: 100%;
-    }
-    
-    .card-body {
+    /* Bandit specific styles */
+    .bandit-hero {
+      min-height: 60vh;
       display: flex;
-      flex-direction: column;
-      border-top: 2px solid var(--pink);
-    }
-    
-    .card-text {
-      flex-grow: 1;
-    }
-    
-    .card-img-top {
-      height: 220px;
-      object-fit: contain;
-      padding: 20px;
-      background-color: var(--black);
-    }
-    
-    .logo-container {
-      text-align: center;
-      margin: 3rem 0;
-    }
-    
-    .logo-img {
-      max-width: 400px;
-      width: 100%;
-    }
-    
-    .website-preview {
-      border-radius: 8px;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      background: linear-gradient(135deg, var(--color-background) 0%, var(--color-background-alt) 100%);
       overflow: hidden;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-      border: 1px solid var(--pink);
+      padding: var(--space-8) 0;
     }
     
-    .equal-height-row {
-      display: flex;
-      flex-wrap: wrap;
+    .bandit-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 20% 50%, var(--color-primary) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 80%, var(--color-primary-dark) 0%, transparent 50%);
+      opacity: 0.1;
     }
     
-    .equal-height-row > [class*='col-'] {
-      display: flex;
-      flex-direction: column;
+    .bandit-logo {
+      max-width: 500px;
+      width: 100%;
+      height: auto;
+      filter: drop-shadow(0 10px 30px rgba(0,0,0,0.5));
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+    
+    .bandit-intro {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+      font-size: var(--text-lg);
+      line-height: 1.8;
+      color: var(--color-text-secondary);
+    }
+    
+    .bandit-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-8);
+      height: 100%;
+      transition: all var(--transition-base);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .bandit-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--color-primary);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform var(--transition-base);
+    }
+    
+    .bandit-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--color-primary);
+    }
+    
+    .bandit-card:hover::before {
+      transform: scaleX(1);
+    }
+    
+    .bandit-card h3 {
+      color: var(--color-primary);
+      margin-bottom: var(--space-4);
+    }
+    
+    .website-showcase {
+      background: var(--color-surface);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-xl);
+      border: 1px solid var(--color-border);
+    }
+    
+    .website-showcase img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    
+    .cta-section {
+      text-align: center;
+      padding: var(--space-16) 0;
+      background: var(--color-background-alt);
+      border-radius: var(--radius-xl);
+      margin: var(--space-12) 0;
+    }
+    
+    .cta-section h2 {
+      margin-bottom: var(--space-8);
     }
   </style>
 </head>
 <body>
-  <!-- NAVBAR -->
-  <nav class="navbar navbar-expand-lg navbar-dark">
-    <div class="container">
-      <a class="navbar-brand" href="index.html">Nicolo DiFerdinando</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+  <!-- Navigation -->
+  <nav class="navigation" id="navigation">
+    <div class="container navigation__container">
+      <a href="index.html" class="navigation__brand">ND</a>
+      
+      <!-- Desktop Menu -->
+      <ul class="navigation__menu">
+        <li class="navigation__item">
+          <a href="index.html#about" class="navigation__link">About</a>
+        </li>
+        <li class="navigation__item">
+          <a href="index.html#projects" class="navigation__link">Projects</a>
+        </li>
+        <li class="navigation__item">
+          <a href="index.html#resume" class="navigation__link">Resume</a>
+        </li>
+        <li class="navigation__item">
+          <a href="index.html#certifications" class="navigation__link">Certifications</a>
+        </li>
+        <li class="navigation__item">
+          <a href="index.html" class="navigation__link">Portfolio</a>
+        </li>
+        <li class="navigation__item">
+          <a href="index.html#contact" class="navigation__link">Contact</a>
+        </li>
+      </ul>
+      
+      <!-- Mobile Menu Toggle -->
+      <button class="navigation__toggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="index.html#about">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="index.html#projects">Projects</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="index.html#contact">Contact</a>
-          </li>
-        </ul>
-      </div>
     </div>
   </nav>
 
-  <!-- BANDIT SHOWCASE -->
-  <section class="container py-5">
-    <div class="logo-container">
-      <img src="images/Bandit Fancy.png" alt="Bandit Logo" class="logo-img">
-    </div> 
-    <div class="row">
-      <div class="col-md-8 mx-auto">
-        <p class="lead text-center mb-5">
-          Bandit is redefining transportation in San Luis Obispo by creating a safe, reliable, and enjoyable experience
-          that enhances every night out and special event. We're committed to reducing drunk driving and promoting smarter 
-          choices in our community.
-        </p>
+  <!-- Hero Section -->
+  <section class="bandit-hero">
+    <div class="container" style="display: flex; justify-content: center; align-items: center; width: 100%;">
+      <div data-aos="zoom-in">
+        <img src="images/Bandit Fancy.png" alt="Bandit Logo" class="bandit-logo">
       </div>
-    </div>
-    
-    <div class="row equal-height-row mb-5">
-      <div class="col-md-4 mb-4">
-        <div class="card">
-          <div class="card-body">
-            <h4 class="card-title" style="color: var(--pink);">Our Mission</h4>
-            <p class="card-text">
-              We're addressing the transportation gap that traditional options fail to fill, particularly for students and 
-              young adults when rideshare prices surge and wait times become unpredictable.
-            </p>
-          </div>
-        </div>
-      </div>
-      
-      <div class="col-md-4 mb-4">
-        <div class="card">
-          <div class="card-body">
-            <h4 class="card-title" style="color: var(--pink);">Services</h4>
-            <p class="card-text">
-              Bandit provides transportation for nights out, special events, and more, turning getting around into
-              an integral part of the experience rather than an afterthought.
-            </p>
-          </div>
-        </div>
-      </div>
-      
-      <div class="col-md-4 mb-4">
-        <div class="card">
-          <div class="card-body">
-            <h4 class="card-title" style="color: var(--pink);">Community</h4>
-            <p class="card-text">
-              By partnering with local businesses, event organizers, and student groups, we're creating a transportation 
-              network that strengthens the San Luis Obispo community.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="text-center mt-5">
-      <a href="#" class="btn btn-primary btn-lg">Coming Soon</a>
     </div>
   </section>
   
-  <!-- WEBSITE SECTION -->
-  <section class="container py-5">
-    <h2 class="section-title">OUR WEBSITE</h2>
-    
-    <div class="row equal-height-row align-items-stretch">
-      <div class="col-md-6 mb-4">
-        <div class="card">
-          <div class="card-body">
-            <h4 class="card-title" style="color: var(--pink);">Schedule Your Ride</h4>
-            <p class="card-text">
-              Visit our official website to schedule your rides, learn about our services, and discover how we're redefining transportation for Cal Poly students. Smooth rides are just a couple clicks away!
-            </p>
-            <p class="card-text">
-              We're the driving company for the thrifters and coffee lovers, the band players and house show dancers, the party hosts and study-night warriors. Bandit isn't just a driving service—we're a brand built for the college experience, by students, for students.
-            </p>
-            <div class="text-center mt-auto">
-              <a href="https://www.banditdrives.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">
-                <i class="fas fa-globe"></i> Visit Our Website
-              </a>
-            </div>
-          </div>
-        </div>
+  <!-- Introduction -->
+  <section class="section">
+    <div class="container">
+      <div class="bandit-intro" data-aos="fade-up">
+        <h1 class="gradient-text" style="font-size: var(--text-4xl); margin-bottom: var(--space-6);">Redefining Transportation in SLO</h1>
+        <p>
+          Bandit is creating a safe, reliable, and enjoyable transportation experience that enhances every night out and special event. 
+          We're committed to reducing drunk driving and promoting smarter choices in our community.
+        </p>
       </div>
       
-      <div class="col-md-6 mb-4">
-        <div class="card">
-          <div class="card-body">
-            <h4 class="card-title" style="color: var(--pink);">Bandit</h4>
-            <div class="website-preview mt-3">
-              <img src="images/Website Header.png" alt="Bandit Website Header" class="img-fluid" style="width: 100%; border-radius: 8px; border: 2px solid var(--pink); background-color: var(--black);">
-            </div>
-            <div class="text-center mt-auto">
-              <a href="https://www.banditdrives.com/scheduling" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-                <i class="fas fa-calendar-check"></i> Schedule Now!
-              </a>
-            </div>
+      <div class="card-grid" style="margin-top: var(--space-16);">
+        <div class="bandit-card" data-aos="fade-up" data-aos-delay="100">
+          <h3><i class="fas fa-bullseye" style="margin-right: var(--space-2);"></i> Our Mission</h3>
+          <p>
+            We're addressing the transportation gap that traditional options fail to fill, particularly for students and 
+            young adults when rideshare prices surge and wait times become unpredictable.
+          </p>
+        </div>
+        
+        <div class="bandit-card" data-aos="fade-up" data-aos-delay="200">
+          <h3><i class="fas fa-car" style="margin-right: var(--space-2);"></i> Services</h3>
+          <p>
+            Bandit provides transportation for nights out, special events, and more, turning getting around into 
+            an integral part of the experience rather than an afterthought.
+          </p>
+        </div>
+        
+        <div class="bandit-card" data-aos="fade-up" data-aos-delay="300">
+          <h3><i class="fas fa-users" style="margin-right: var(--space-2);"></i> Community</h3>
+          <p>
+            By partnering with local businesses, event organizers, and student groups, we're creating a transportation 
+            network that strengthens the San Luis Obispo community.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Website Section -->
+  <section class="section" style="background: var(--color-background-alt);">
+    <div class="container">
+      <h2 class="gradient-text" style="text-align: center; font-size: var(--text-4xl); margin-bottom: var(--space-12);" data-aos="fade-up">
+        Experience Bandit
+      </h2>
+      
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-8); align-items: center;">
+        <div data-aos="fade-right">
+          <h3 style="font-size: var(--text-2xl); margin-bottom: var(--space-4);">Schedule Your Ride</h3>
+          <p style="margin-bottom: var(--space-6); line-height: 1.8;">
+            Visit our official website to schedule your rides, learn about our services, and discover how we're redefining 
+            transportation for Cal Poly students. Smooth rides are just a couple clicks away!
+          </p>
+          <p style="margin-bottom: var(--space-8); line-height: 1.8;">
+            We're the driving company for the thrifters and coffee lovers, the band players and house show dancers, 
+            the party hosts and study-night warriors. Bandit isn't just a driving service—we're a brand built for 
+            the college experience, by students, for students.
+          </p>
+          <div style="display: flex; gap: var(--space-4); flex-wrap: wrap;">
+            <a href="https://www.banditdrives.com" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               class="btn btn--primary"
+               data-magnetic>
+              <i class="fas fa-globe"></i>
+              <span>Visit Our Website</span>
+            </a>
+            <a href="https://www.banditdrives.com/scheduling" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               class="btn btn--secondary"
+               data-magnetic>
+              <i class="fas fa-calendar-check"></i>
+              <span>Schedule Now</span>
+            </a>
+          </div>
+        </div>
+        
+        <div data-aos="fade-left">
+          <div class="website-showcase">
+            <img src="images/Website Header.png" alt="Bandit Website" loading="lazy">
           </div>
         </div>
       </div>
     </div>
   </section>
   
-  <!-- GALLERY & FUTURE SECTION -->
-  <section class="container py-5">
-    <h2 class="section-title">OUR VISION</h2>
-    
-    <div class="row equal-height-row">
-      <div class="col-md-6 mb-4">
-        <div class="card">
-          <div class="card-body">
-            <h4 class="card-title" style="color: var(--pink);">Safety First</h4>
-            <p class="card-text">
-              Bandit is dedicated to reducing drunk driving by offering convenient and safe transportation
-              options that make responsible choices the easiest ones to make.
-            </p>
-          </div>
+  <!-- Vision Section -->
+  <section class="section">
+    <div class="container">
+      <h2 class="gradient-text" style="text-align: center; font-size: var(--text-4xl); margin-bottom: var(--space-12);" data-aos="fade-up">
+        Our Vision
+      </h2>
+      
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-8); margin-bottom: var(--space-16);">
+        <div class="bandit-card" data-aos="fade-up" data-aos-delay="100">
+          <h3><i class="fas fa-shield-alt" style="margin-right: var(--space-2);"></i> Safety First</h3>
+          <p>
+            Bandit is dedicated to reducing drunk driving by offering convenient and safe transportation 
+            options that make responsible choices the easiest ones to make.
+          </p>
+        </div>
+        
+        <div class="bandit-card" data-aos="fade-up" data-aos-delay="200">
+          <h3><i class="fas fa-sparkles" style="margin-right: var(--space-2);"></i> More Than Just Rides</h3>
+          <p>
+            We're blending convenience with creativity, making transportation an enjoyable part of your night out 
+            rather than just a way to get from point A to point B.
+          </p>
         </div>
       </div>
       
-      <div class="col-md-6 mb-4">
-        <div class="card">
-          <div class="card-body">
-            <h4 class="card-title" style="color: var(--pink);">More Than Just Rides</h4>
-            <p class="card-text">
-              We're blending convenience with creativity, making transportation an enjoyable part of your night out
-              rather than just a way to get from point A to point B.
-            </p>
-          </div>
+      <!-- CTA Section -->
+      <div class="cta-section" data-aos="fade-up">
+        <h2 class="gradient-text">Join the Movement</h2>
+        <p style="max-width: 600px; margin: 0 auto var(--space-8); color: var(--color-text-secondary);">
+          Be part of reshaping transportation in San Luis Obispo. Follow us for updates on our launch, 
+          service areas, and special event transportation.
+        </p>
+        <div style="display: flex; gap: var(--space-4); justify-content: center; flex-wrap: wrap;">
+          <a href="https://instagram.com/bandit.slo" 
+             target="_blank" 
+             rel="noopener noreferrer" 
+             class="btn btn--primary"
+             data-magnetic>
+            <i class="fab fa-instagram"></i>
+            <span>Follow @bandit.slo</span>
+          </a>
+          <a href="https://www.banditdrives.com" 
+             target="_blank" 
+             rel="noopener noreferrer" 
+             class="btn btn--secondary"
+             data-magnetic>
+            <i class="fas fa-car"></i>
+            <span>Coming Soon</span>
+          </a>
         </div>
       </div>
-    </div>
-    
-    <h2 class="section-title mt-5">JOIN THE MOVEMENT</h2>
-    <div class="row">
-      <div class="col-md-8 mx-auto">
-        <p class="text-center mb-5">
-          Be part of reshaping transportation in San Luis Obispo. Follow us for updates on our launch, service areas, and special event transportation. 
-          Together, we're making our community safer and more connected through reliable transportation.
-        </p>
-      </div>
-    </div>
-    
-    <div class="text-center">
-      <a href="https://instagram.com/bandit.slo" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-        <i class="fab fa-instagram"></i> Follow Us
-      </a>
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="container">
-      <p>© 2025 Bandit San Luis Obispo | All Rights Reserved</p>
-      <p>
-        <a href="index.html">Back to Portfolio</a> |
-        <a href="mailto:nicodiferd@gmail.com">Support</a> |
-        <a href="https://instagram.com/bandit.slo" target="_blank" rel="noopener noreferrer">Instagram</a> |
-        <a href="https://www.banditdrives.com" target="_blank" rel="noopener noreferrer">www.DriveBandit.com</a>
-      </p>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer__container">
+      <p class="footer__text">© 2025 Bandit San Luis Obispo | Co-Founded by Nicolo DiFerdinando</p>
+      <div class="footer__socials">
+        <a href="index.html" 
+           class="footer__social"
+           aria-label="Portfolio">
+          <i class="fas fa-home"></i>
+        </a>
+        <a href="https://instagram.com/bandit.slo" 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           class="footer__social"
+           aria-label="Instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://www.banditdrives.com" 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           class="footer__social"
+           aria-label="Bandit Website">
+          <i class="fas fa-globe"></i>
+        </a>
+        <a href="mailto:nicodiferd@gmail.com" 
+           class="footer__social"
+           aria-label="Email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </div>
     </div>
   </footer>
-
-  <!-- Bootstrap JS Bundle with Popper -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- Scripts -->
+  <script type="module" src="js/app.js"></script>
+  
+  <!-- Simple AOS implementation -->
+  <script>
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '50px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('aos-animate');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+    
+    document.addEventListener('DOMContentLoaded', () => {
+      const animatedElements = document.querySelectorAll('[data-aos]');
+      animatedElements.forEach(el => observer.observe(el));
+      
+      // Add page loaded class
+      document.body.classList.add('loaded');
+    });
+  </script>
+  
+  <style>
+    /* AOS animations */
+    [data-aos] {
+      opacity: 0;
+      transition-duration: 800ms;
+    }
+    
+    [data-aos].aos-animate {
+      opacity: 1;
+    }
+    
+    [data-aos="fade-up"] {
+      transform: translateY(30px);
+    }
+    
+    [data-aos="fade-up"].aos-animate {
+      transform: translateY(0);
+    }
+    
+    [data-aos="fade-right"] {
+      transform: translateX(-30px);
+    }
+    
+    [data-aos="fade-right"].aos-animate {
+      transform: translateX(0);
+    }
+    
+    [data-aos="fade-left"] {
+      transform: translateX(30px);
+    }
+    
+    [data-aos="fade-left"].aos-animate {
+      transform: translateX(0);
+    }
+    
+    [data-aos="zoom-in"] {
+      transform: scale(0.8);
+    }
+    
+    [data-aos="zoom-in"].aos-animate {
+      transform: scale(1);
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .bandit-hero {
+        min-height: 50vh;
+      }
+      
+      .bandit-logo {
+        max-width: 300px;
+      }
+      
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      section > div > div[style*="grid-template-columns: 1fr 1fr"] {
+        grid-template-columns: 1fr !important;
+      }
+    }
+    
+    /* Page transition */
+    body {
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    body.loaded {
+      opacity: 1;
+    }
+  </style>
 </body>
 </html> 
