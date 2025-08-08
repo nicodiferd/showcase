@@ -8,17 +8,12 @@ export class ThemeManager {
     this.themeSelectors = document.querySelectorAll('[data-theme-selector]');
     this.root = document.documentElement;
     this.storageKey = 'preferredTheme';
-    this.defaultTheme = 'dark';
+    this.defaultTheme = 'system';
     
     this.themes = {
-      dark: {
-        name: 'Dark',
-        class: 'dark'
-      },
-      light: {
-        name: 'Light',
-        class: 'light'
-      }
+      system: { name: 'System', class: '' },
+      dark: { name: 'Dark', class: 'dark' },
+      light: { name: 'Light', class: 'light' }
     };
     
     this.init();
@@ -32,13 +27,12 @@ export class ThemeManager {
   
   loadTheme() {
     const savedTheme = localStorage.getItem(this.storageKey);
-    const systemTheme = this.getSystemTheme();
-    const theme = savedTheme || systemTheme || this.defaultTheme;
-    
-    this.setTheme(theme);
+    const systemTheme = this.getSystemThemeName();
+    const theme = savedTheme || this.defaultTheme;
+    this.setTheme(theme, systemTheme);
   }
   
-  setTheme(themeName) {
+  setTheme(themeName, systemThemeName = this.getSystemThemeName()) {
     // Remove all theme classes
     Object.values(this.themes).forEach(theme => {
       this.root.classList.remove(theme.class);
@@ -46,8 +40,10 @@ export class ThemeManager {
     
     // Add new theme class
     if (this.themes[themeName]) {
-      this.root.classList.add(this.themes[themeName].class);
-      this.root.setAttribute('data-theme', themeName);
+      const effectiveTheme = themeName === 'system' ? systemThemeName : themeName;
+      const themeDef = this.themes[effectiveTheme];
+      if (themeDef.class) this.root.classList.add(themeDef.class);
+      this.root.setAttribute('data-theme', effectiveTheme);
       
       // Update selectors
       this.themeSelectors.forEach(selector => {
@@ -59,16 +55,14 @@ export class ThemeManager {
       
       // Dispatch event
       window.dispatchEvent(new CustomEvent('themechange', {
-        detail: { theme: themeName }
+        detail: { theme: effectiveTheme, preference: themeName }
       }));
     }
   }
   
-  getSystemTheme() {
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
-      return 'light';
-    }
-    return 'dark';
+  getSystemThemeName() {
+    if (!window.matchMedia) return 'dark';
+    return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
   }
   
   setupThemeSelectors() {
@@ -84,9 +78,10 @@ export class ThemeManager {
       const mediaQuery = window.matchMedia('(prefers-color-scheme: light)');
       
       mediaQuery.addEventListener('change', (e) => {
-        // Only change if user hasn't set a preference
-        if (!localStorage.getItem(this.storageKey)) {
-          this.setTheme(e.matches ? 'light' : 'dark');
+        const saved = localStorage.getItem(this.storageKey) || this.defaultTheme;
+        // If user preference is 'system', update effective theme
+        if (saved === 'system') {
+          this.setTheme('system', e.matches ? 'light' : 'dark');
         }
       });
     }

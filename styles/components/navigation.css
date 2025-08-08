@@ -170,6 +170,7 @@
   transition: right var(--transition-base);
   z-index: var(--z-modal);
   overflow-y: auto;
+  outline: none;
 }
 
 .navigation__mobile.active {

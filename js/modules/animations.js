@@ -9,13 +9,16 @@ export class Animations {
   }
   
   init() {
-    this.setupParticles();
-    this.setupCursorEffect();
-    this.setupCardTilt();
+    const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!reduceMotion) {
+      this.setupParticles();
+      this.setupCursorEffect();
+      this.setupCardTilt();
+      this.setupParallax();
+      this.setupMagneticButtons();
+    }
     this.setupCounterAnimations();
     this.setupTypewriter();
-    this.setupParallax();
-    this.setupMagneticButtons();
     this.setupScrollAnimations();
   }
   

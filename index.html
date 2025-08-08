@@ -5,16 +5,43 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Nicolo DiFerdinando - Freelance AI Engineer specializing in LLM Agents, iOS Development, Full Stack Solutions & Cybersecurity">
   <meta name="author" content="Nicolo DiFerdinando">
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Nicolo DiFerdinando | Freelance AI Engineer">
+  <meta property="og:description" content="Nicolo DiFerdinando - Freelance AI Engineer specializing in LLM Agents, iOS Development, Full Stack Solutions & Cybersecurity">
+  <meta property="og:url" content="https://nicolod.org/">
+  <meta property="og:image" content="/images/Nicolo.jpeg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Nicolo DiFerdinando | Freelance AI Engineer">
+  <meta name="twitter:description" content="Freelance AI Engineer specializing in LLM Agents, iOS Development, Full Stack Solutions & Cybersecurity.">
+  <meta name="twitter:image" content="/images/Nicolo.jpeg">
   
   <title>Nicolo DiFerdinando | Freelance AI Engineer</title>
   
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="prefetch" href="/bandit.html" as="document">
+  <link rel="preload" href="/images/Nicolo.jpeg" as="image" fetchpriority="high">
   
   <!-- Preconnect to external domains -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
   
+  <!-- Early theme to prevent flash -->
+  <script>
+    (function() {
+      try {
+        var saved = localStorage.getItem('preferredTheme') || 'system';
+        var system = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        var theme = saved === 'system' ? system : saved;
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (e) {}
+    })();
+  </script>
+
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   
@@ -23,6 +50,23 @@
   
   <!-- Main Stylesheet -->
   <link rel="stylesheet" href="styles/main.css">
+  <link rel="canonical" href="https://nicolod.org/">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Nicolo DiFerdinando",
+    "url": "https://nicolod.org/",
+    "image": "https://nicolod.org/images/Nicolo.jpeg",
+    "jobTitle": "Freelance AI Engineer",
+    "email": "mailto:nicodiferd@gmail.com",
+    "sameAs": [
+      "https://github.com/nicodiferd",
+      "https://www.linkedin.com/in/nicolo-diferdinando/"
+    ]
+  }
+  </script>
   
   <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -37,6 +81,7 @@
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NWWM38WB"
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
+  <a href="#content" class="skip-link">Skip to content</a>
 
   <!-- Navigation -->
   <nav class="navigation" id="navigation">
@@ -64,7 +109,8 @@
           <a href="#contact" class="navigation__link">Contact</a>
         </li>
         <li class="navigation__item">
-          <select class="theme-selector" data-theme-selector>
+          <select class="theme-selector" data-theme-selector aria-label="Theme selector">
+            <option value="system">System</option>
             <option value="dark">Dark</option>
             <option value="light">Light</option>
           </select>
@@ -72,7 +118,7 @@
       </ul>
       
       <!-- Mobile Menu Toggle -->
-      <button class="navigation__toggle" aria-label="Toggle menu">
+      <button class="navigation__toggle" aria-label="Toggle menu" aria-controls="mobileMenu" aria-expanded="false">
         <span></span>
         <span></span>
         <span></span>
@@ -81,10 +127,10 @@
   </nav>
   
   <!-- Mobile Menu -->
-  <div class="navigation__mobile">
+  <div class="navigation__mobile" id="mobileMenu" role="navigation" aria-label="Mobile navigation" aria-hidden="true">
     <div class="navigation__mobile-header">
       <span class="navigation__brand">ND</span>
-      <button class="navigation__toggle" aria-label="Close menu">
+      <button class="navigation__toggle" aria-label="Close menu" aria-controls="mobileMenu" aria-expanded="false">
         <i class="fas fa-times"></i>
       </button>
     </div>
@@ -108,16 +154,17 @@
         <a href="#contact" class="navigation__mobile-link">Contact</a>
       </li>
       <li class="navigation__mobile-item">
-        <select class="theme-selector" data-theme-selector>
+        <select class="theme-selector" data-theme-selector aria-label="Theme selector">
+          <option value="system">System</option>
           <option value="dark">Dark</option>
           <option value="light">Light</option>
-          <option value="minimal">Minimal</option>
         </select>
       </li>
     </ul>
   </div>
   <div class="navigation__overlay"></div>
   
+  <main id="content" tabindex="-1">
   <!-- Hero Section -->
   <section class="hero" id="home">
     <div class="hero__background">
@@ -127,7 +174,7 @@
     
     <div class="hero__content">
       <div class="hero__avatar" data-aos="zoom-in">
-        <img src="images/Nicolo.jpeg" alt="Nicolo DiFerdinando" class="hero__avatar-image">
+        <img src="images/Nicolo.jpeg" alt="Nicolo DiFerdinando" class="hero__avatar-image" width="200" height="200" decoding="async" fetchpriority="high">
       </div>
       
       <h1 class="hero__title" data-aos="fade-up" data-aos-delay="200">
@@ -231,7 +278,7 @@
         <!-- Project 1: Bandit -->
         <article class="card" data-aos="fade-up" data-aos-delay="100">
           <div class="card__image">
-            <img src="images/Bandit Fancy.png" alt="Bandit">
+             <img src="images/Bandit Fancy.png" alt="Bandit" loading="lazy" decoding="async">
             <div class="card__image-overlay"></div>
           </div>
           <div class="card__content">
@@ -256,7 +303,7 @@
         <!-- Project 2: Domain MVP Hunter -->
         <article class="card" data-aos="fade-up" data-aos-delay="200">
           <div class="card__image">
-            <img src="images/domain-hunter.png" alt="Domain MVP Hunter">
+             <img src="images/domain-hunter.png" alt="Domain MVP Hunter" loading="lazy" decoding="async">
             <div class="card__image-overlay"></div>
           </div>
           <div class="card__content">
@@ -281,7 +328,7 @@
         <!-- Project 3: Wedge App -->
         <article class="card" data-aos="fade-up" data-aos-delay="300">
           <div class="card__image">
-            <img src="images/wedge-app.png" alt="Wedge App">
+             <img src="images/wedge-app.png" alt="Wedge App" loading="lazy" decoding="async">
             <div class="card__image-overlay"></div>
           </div>
           <div class="card__content">
@@ -309,7 +356,7 @@
         <!-- Project 4: Campus Storage -->
         <article class="card" data-aos="fade-up" data-aos-delay="400">
           <div class="card__image">
-            <img src="images/campus-storage.png" alt="Campus Storage">
+             <img src="images/campus-storage.png" alt="Campus Storage" loading="lazy" decoding="async">
             <div class="card__image-overlay"></div>
           </div>
           <div class="card__content">
@@ -337,7 +384,7 @@
         <!-- Project 5: diferdinando.com -->
         <article class="card" data-aos="fade-up" data-aos-delay="500">
           <div class="card__image">
-            <img src="images/diferdinando-site.png" alt="diferdinando.com">
+             <img src="images/diferdinando-site.png" alt="diferdinando.com" loading="lazy" decoding="async">
             <div class="card__image-overlay"></div>
           </div>
           <div class="card__content">
@@ -365,7 +412,7 @@
         <!-- Project 6: Slackbot Servers -->
         <article class="card" data-aos="fade-up" data-aos-delay="600">
           <div class="card__image">
-            <img src="images/slackbot.png" alt="Slackbot Servers">
+             <img src="images/slackbot.png" alt="Slackbot Servers" loading="lazy" decoding="async">
             <div class="card__image-overlay"></div>
           </div>
           <div class="card__content">
@@ -498,6 +545,7 @@
                    name="name" 
                    class="form__input" 
                    placeholder=" " 
+                   autocomplete="name"
                    required>
             <label class="form__label">Your Name</label>
           </div>
@@ -507,6 +555,7 @@
                    name="email" 
                    class="form__input" 
                    placeholder=" " 
+                   autocomplete="email"
                    required>
             <label class="form__label">Your Email</label>
           </div>
@@ -520,6 +569,8 @@
             <label class="form__label">Your Message</label>
           </div>
           
+          <input type="text" name="_gotcha" class="sr-only" tabindex="-1" autocomplete="off" aria-hidden="true">
+          
           <button type="submit" class="btn btn--primary form__submit" data-magnetic>
             <span>Send Message</span>
             <i class="fas fa-paper-plane"></i>
@@ -528,6 +579,7 @@
       </div>
     </div>
   </section>
+  </main>
   
   <!-- Footer -->
   <footer class="footer">
@@ -557,124 +609,9 @@
     </div>
   </footer>
   
-  <!-- Notification styles -->
-  <style>
-    .notification {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      padding: 1rem 2rem;
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-md);
-      box-shadow: var(--shadow-lg);
-      transform: translateX(400px);
-      transition: transform var(--transition-base);
-      z-index: var(--z-tooltip);
-    }
-    
-    .notification.show {
-      transform: translateX(0);
-    }
-    
-    .notification--success {
-      border-color: #10b981;
-      color: #10b981;
-    }
-    
-    .notification--error {
-      border-color: #ef4444;
-      color: #ef4444;
-    }
-    
-    body.page-transition {
-      opacity: 0;
-      transition: opacity var(--transition-base);
-    }
-    
-    body.loaded {
-      opacity: 1;
-    }
-    
-    .cursor-glow {
-      position: fixed;
-      width: 20px;
-      height: 20px;
-      background: radial-gradient(circle, var(--color-primary) 0%, transparent 70%);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 9999;
-      opacity: 0.5;
-      mix-blend-mode: screen;
-      transition: opacity var(--transition-fast);
-    }
-    
-    [data-aos] {
-      opacity: 0;
-      transition-duration: 800ms;
-    }
-    
-    [data-aos].aos-animate {
-      opacity: 1;
-    }
-    
-    [data-aos="fade-up"] {
-      transform: translateY(30px);
-    }
-    
-    [data-aos="fade-up"].aos-animate {
-      transform: translateY(0);
-    }
-    
-    [data-aos="fade-right"] {
-      transform: translateX(-30px);
-    }
-    
-    [data-aos="fade-right"].aos-animate {
-      transform: translateX(0);
-    }
-    
-    [data-aos="fade-left"] {
-      transform: translateX(30px);
-    }
-    
-    [data-aos="fade-left"].aos-animate {
-      transform: translateX(0);
-    }
-    
-    [data-aos="zoom-in"] {
-      transform: scale(0.8);
-    }
-    
-    [data-aos="zoom-in"].aos-animate {
-      transform: scale(1);
-    }
-  </style>
+  
   
   <!-- Scripts -->
   <script type="module" src="js/app.js"></script>
-  
-  <!-- Simple AOS implementation for demo -->
-  <script>
-    // Simple AOS implementation
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '50px'
-    };
-    
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('aos-animate');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, observerOptions);
-    
-    document.addEventListener('DOMContentLoaded', () => {
-      const animatedElements = document.querySelectorAll('[data-aos]');
-      animatedElements.forEach(el => observer.observe(el));
-    });
-  </script>
 </body>
 </html>
