@@ -674,5 +674,73 @@
   
   <!-- Scripts -->
   <script type="module" src="js/app.js"></script>
+  
+  <!-- Counter Animation Fix -->
+  <script>
+    // Immediate counter fix to ensure values display
+    document.addEventListener('DOMContentLoaded', function() {
+      function initCounters() {
+        const counters = document.querySelectorAll('[data-counter]');
+        
+        counters.forEach(counter => {
+          const target = parseInt(counter.getAttribute('data-counter'));
+          const suffix = counter.getAttribute('data-suffix') || '';
+          
+          // Animate counter
+          let current = 0;
+          const increment = target / 50; // 50 steps
+          const timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+              current = target;
+              clearInterval(timer);
+            }
+            counter.textContent = Math.floor(current) + suffix;
+          }, 30);
+        });
+      }
+      
+      // Check if counters are in view
+      function checkCountersInView() {
+        const counters = document.querySelectorAll('[data-counter]');
+        const aboutSection = document.querySelector('.about__stats');
+        
+        if (!aboutSection) return;
+        
+        const rect = aboutSection.getBoundingClientRect();
+        const inView = rect.top < window.innerHeight && rect.bottom > 0;
+        
+        if (inView && counters[0].textContent === '0+' || counters[0].textContent === '0') {
+          initCounters();
+        }
+      }
+      
+      // Run immediately
+      setTimeout(checkCountersInView, 100);
+      
+      // Run on scroll
+      let scrollTimeout;
+      window.addEventListener('scroll', () => {
+        if (!scrollTimeout) {
+          scrollTimeout = setTimeout(() => {
+            checkCountersInView();
+            scrollTimeout = null;
+          }, 100);
+        }
+      });
+      
+      // Absolute fallback - force display after 1.5 seconds
+      setTimeout(() => {
+        const counters = document.querySelectorAll('[data-counter]');
+        counters.forEach(counter => {
+          if (counter.textContent === '0' || counter.textContent === '0+') {
+            const target = counter.getAttribute('data-counter');
+            const suffix = counter.getAttribute('data-suffix') || '';
+            counter.textContent = target + suffix;
+          }
+        });
+      }, 1500);
+    });
+  </script>
 </body>
 </html>
