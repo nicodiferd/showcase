@@ -51,6 +51,67 @@
   <!-- Main Stylesheet -->
   <link rel="stylesheet" href="styles/main.css">
   <link rel="canonical" href="https://nicolod.org/">
+  
+  <!-- Critical inline styles for immediate visibility -->
+  <style>
+    /* Ensure content is visible immediately */
+    body {
+      opacity: 1 !important;
+      visibility: visible !important;
+      display: block !important;
+    }
+    
+    main {
+      opacity: 1 !important;
+      visibility: visible !important;
+      display: block !important;
+    }
+    
+    section {
+      opacity: 1 !important;
+      visibility: visible !important;
+      display: block !important;
+    }
+    
+    .hero {
+      opacity: 1 !important;
+      visibility: visible !important;
+      min-height: 100vh;
+      display: flex !important;
+    }
+    
+    .hero__content {
+      opacity: 1 !important;
+      visibility: visible !important;
+      display: block !important;
+    }
+    
+    /* Override any hidden animations initially */
+    [data-aos] {
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+    
+    /* Ensure navigation is visible */
+    .navigation {
+      opacity: 1 !important;
+      visibility: visible !important;
+      display: flex !important;
+    }
+  </style>
+  
+  <!-- Noscript fallback styles -->
+  <noscript>
+    <style>
+      [data-aos] {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+      body {
+        opacity: 1 !important;
+      }
+    </style>
+  </noscript>
 
   <script type="application/ld+json">
   {
@@ -173,19 +234,19 @@
     </div>
     
     <div class="hero__content">
-      <div class="hero__avatar" data-aos="zoom-in">
+      <div class="hero__avatar">
         <img src="images/Nicolo.jpeg" alt="Nicolo DiFerdinando" class="hero__avatar-image" width="200" height="200" decoding="async" fetchpriority="high">
       </div>
       
-      <h1 class="hero__title" data-aos="fade-up" data-aos-delay="200">
+      <h1 class="hero__title">
         Hi, I'm <span class="hero__title-gradient">Nicolo</span>
       </h1>
       
-      <p class="hero__subtitle" data-aos="fade-up" data-aos-delay="400">
+      <p class="hero__subtitle">
         Freelance AI Engineer | Cal Poly SLO
       </p>
       
-      <div class="hero__actions" data-aos="fade-up" data-aos-delay="600">
+      <div class="hero__actions">
         <a href="#about" class="btn btn--primary" data-magnetic>
           <span>Explore My Work</span>
           <i class="fas fa-arrow-down"></i>
@@ -206,7 +267,7 @@
   <section class="about section" id="about">
     <div class="container">
       <div class="about__container">
-        <div class="about__content" data-aos="fade-right">
+        <div class="about__content">
           <h2 class="gradient-text">About Me</h2>
           <p>
             Hello! I'm Nicolo Luca DiFerdinando, a Freelance AI Engineer and Industrial Engineering 
@@ -246,7 +307,7 @@
           </div>
         </div>
         
-        <div class="about__stats" data-aos="fade-left">
+        <div class="about__stats" data-removed="fade-left">
           <div class="stat">
             <div class="stat__number" data-counter="6" data-suffix="+">0+</div>
             <div class="stat__label">Projects</div>
@@ -268,15 +329,15 @@
   <section class="projects section" id="projects">
     <div class="container">
       <div class="projects__header">
-        <h2 class="projects__title gradient-text" data-aos="fade-up">Featured Projects</h2>
-        <p class="projects__subtitle" data-aos="fade-up" data-aos-delay="200">
+        <h2 class="projects__title gradient-text" data-removed="fade-up">Featured Projects</h2>
+        <p class="projects__subtitle" data-removed="fade-up" data-removed-delay="200">
           AI Solutions, iOS Apps, Full-Stack Development & Cybersecurity Tools
         </p>
       </div>
       
       <div class="card-grid">
         <!-- Project 1: Bandit -->
-        <article class="card" data-aos="fade-up" data-aos-delay="100">
+        <article class="card" data-removed="fade-up" data-removed-delay="100">
           <div class="card__image">
              <img src="images/Bandit Fancy.png" alt="Bandit" loading="lazy" decoding="async">
             <div class="card__image-overlay"></div>
@@ -301,7 +362,7 @@
         </article>
         
         <!-- Project 2: Domain MVP Hunter -->
-        <article class="card" data-aos="fade-up" data-aos-delay="200">
+        <article class="card" data-removed="fade-up" data-removed-delay="200">
           <div class="card__image">
              <img src="images/domain-hunter.png" alt="Domain MVP Hunter" loading="lazy" decoding="async">
             <div class="card__image-overlay"></div>
@@ -326,7 +387,7 @@
         </article>
         
         <!-- Project 3: Wedge App -->
-        <article class="card" data-aos="fade-up" data-aos-delay="300">
+        <article class="card" data-removed="fade-up" data-removed-delay="300">
           <div class="card__image">
              <img src="images/wedge-app.png" alt="Wedge App" loading="lazy" decoding="async">
             <div class="card__image-overlay"></div>
@@ -354,7 +415,7 @@
         </article>
         
         <!-- Project 4: Campus Storage -->
-        <article class="card" data-aos="fade-up" data-aos-delay="400">
+        <article class="card" data-removed="fade-up" data-removed-delay="400">
           <div class="card__image">
              <img src="images/campus-storage.png" alt="Campus Storage" loading="lazy" decoding="async">
             <div class="card__image-overlay"></div>
@@ -382,7 +443,7 @@
         </article>
         
         <!-- Project 5: diferdinando.com -->
-        <article class="card" data-aos="fade-up" data-aos-delay="500">
+        <article class="card" data-removed="fade-up" data-removed-delay="500">
           <div class="card__image">
              <img src="images/diferdinando-site.png" alt="diferdinando.com" loading="lazy" decoding="async">
             <div class="card__image-overlay"></div>
@@ -410,7 +471,7 @@
         </article>
         
         <!-- Project 6: Slackbot Servers -->
-        <article class="card" data-aos="fade-up" data-aos-delay="600">
+        <article class="card" data-removed="fade-up" data-removed-delay="600">
           <div class="card__image">
              <img src="images/slackbot.png" alt="Slackbot Servers" loading="lazy" decoding="async">
             <div class="card__image-overlay"></div>
@@ -441,15 +502,15 @@
   <section class="section" id="resume">
     <div class="container">
       <div class="contact__container">
-        <h2 class="contact__title gradient-text" data-aos="fade-up">Resume</h2>
-        <p class="contact__subtitle" data-aos="fade-up" data-aos-delay="200">
+        <h2 class="contact__title gradient-text" data-removed="fade-up">Resume</h2>
+        <p class="contact__subtitle" data-removed="fade-up" data-removed-delay="200">
           View my professional experience and qualifications
         </p>
         <a href="https://raw.githubusercontent.com/nicodiferd/resume/main/Nicolo DiFerdinando Resume.pdf" 
            class="btn btn--primary" 
            download="Nicolo_DiFerdinando_Resume.pdf" 
-           data-aos="fade-up" 
-           data-aos-delay="400"
+           data-removed="fade-up" 
+           data-removed-delay="400"
            data-magnetic>
           <i class="fas fa-download"></i>
           <span>Download Resume</span>
@@ -461,61 +522,61 @@
   <!-- Certifications Section -->
   <section class="section" id="certifications">
     <div class="container">
-      <h2 class="gradient-text" style="text-align: center; margin-bottom: 3rem;" data-aos="fade-up">
+      <h2 class="gradient-text" style="text-align: center; margin-bottom: 3rem;" data-removed="fade-up">
         Certifications & Achievements
       </h2>
       
       <div class="card-grid">
-        <div class="card card--minimal" data-aos="fade-up" data-aos-delay="100">
+        <div class="card card--minimal" data-removed="fade-up" data-removed-delay="100">
           <div class="card__content">
             <i class="fas fa-shield-alt" style="font-size: 2rem; color: var(--color-primary); margin-bottom: 1rem;"></i>
             <h3 class="card__title">Splunk Enterprise Certified</h3>
           </div>
         </div>
         
-        <div class="card card--minimal" data-aos="fade-up" data-aos-delay="200">
+        <div class="card card--minimal" data-removed="fade-up" data-removed-delay="200">
           <div class="card__content">
             <i class="fas fa-certificate" style="font-size: 2rem; color: var(--color-primary); margin-bottom: 1rem;"></i>
             <h3 class="card__title">CompTIA Security+</h3>
           </div>
         </div>
         
-        <div class="card card--minimal" data-aos="fade-up" data-aos-delay="300">
+        <div class="card card--minimal" data-removed="fade-up" data-removed-delay="300">
           <div class="card__content">
             <i class="fas fa-users" style="font-size: 2rem; color: var(--color-primary); margin-bottom: 1rem;"></i>
             <h3 class="card__title">Fraternity President</h3>
           </div>
         </div>
         
-        <div class="card card--minimal" data-aos="fade-up" data-aos-delay="400">
+        <div class="card card--minimal" data-removed="fade-up" data-removed-delay="400">
           <div class="card__content">
             <i class="fas fa-baseball-ball" style="font-size: 2rem; color: var(--color-primary); margin-bottom: 1rem;"></i>
             <h3 class="card__title">Cal Poly Club Baseball President</h3>
           </div>
         </div>
         
-        <div class="card card--minimal" data-aos="fade-up" data-aos-delay="500">
+        <div class="card card--minimal" data-removed="fade-up" data-removed-delay="500">
           <div class="card__content">
             <i class="fas fa-briefcase" style="font-size: 2rem; color: var(--color-primary); margin-bottom: 1rem;"></i>
             <h3 class="card__title">3 Cybersecurity Internships</h3>
           </div>
         </div>
         
-        <div class="card card--minimal" data-aos="fade-up" data-aos-delay="600">
+        <div class="card card--minimal" data-removed="fade-up" data-removed-delay="600">
           <div class="card__content">
             <i class="fas fa-building" style="font-size: 2rem; color: var(--color-primary); margin-bottom: 1rem;"></i>
             <h3 class="card__title">Part-Owner of LLC Bandit</h3>
           </div>
         </div>
         
-        <div class="card card--minimal" data-aos="fade-up" data-aos-delay="700">
+        <div class="card card--minimal" data-removed="fade-up" data-removed-delay="700">
           <div class="card__content">
             <i class="fas fa-rocket" style="font-size: 2rem; color: var(--color-primary); margin-bottom: 1rem;"></i>
             <h3 class="card__title">Part-Owner of LLC Wedge</h3>
           </div>
         </div>
         
-        <div class="card card--minimal" data-aos="fade-up" data-aos-delay="800">
+        <div class="card card--minimal" data-removed="fade-up" data-removed-delay="800">
           <div class="card__content">
             <i class="fas fa-code" style="font-size: 2rem; color: var(--color-primary); margin-bottom: 1rem;"></i>
             <h3 class="card__title">Full Stack Developer</h3>
@@ -529,8 +590,8 @@
   <section class="contact section" id="contact">
     <div class="container">
       <div class="contact__container">
-        <h2 class="contact__title gradient-text" data-aos="fade-up">Let's Connect</h2>
-        <p class="contact__subtitle" data-aos="fade-up" data-aos-delay="200">
+        <h2 class="contact__title gradient-text" data-removed="fade-up">Let's Connect</h2>
+        <p class="contact__subtitle" data-removed="fade-up" data-removed-delay="200">
           Interested in AI solutions, app development, or collaboration opportunities? Let's build something amazing together!
         </p>
         
@@ -538,8 +599,8 @@
               method="POST" 
               class="contact__form" 
               data-ajax
-              data-aos="fade-up" 
-              data-aos-delay="400">
+              data-removed="fade-up" 
+              data-removed-delay="400">
           <div class="form__group">
             <input type="text" 
                    name="name" 

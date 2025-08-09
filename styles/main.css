@@ -258,14 +258,43 @@
   transition-property: transform, opacity;
 }
 
-/* AOS variants (moved from inline styles) */
+/* AOS variants DISABLED - causing visibility issues */
+/* 
 [data-aos] {
   opacity: 0;
   transition-duration: 800ms;
+  transition-property: transform, opacity;
 }
 
 [data-aos].aos-animate {
   opacity: 1;
+}
+*/
+
+/* Fallback: Show content if animations fail to load */
+@media (prefers-reduced-motion: reduce) {
+  [data-aos] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Show content after a timeout as fallback */
+body.loaded [data-aos] {
+  animation: fadeInFallback 1s ease-out forwards;
+  animation-delay: 2s;
+}
+
+@keyframes fadeInFallback {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Critical content should always be visible */
+.hero__content,
+.navigation {
+  opacity: 1 !important;
 }
 
 [data-aos="fade-up"] {

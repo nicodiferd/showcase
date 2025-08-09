@@ -35,6 +35,14 @@ class App {
     
     // Mark app as loaded
     document.body.classList.add('loaded');
+    
+    // Fallback: Force show all content after 1 second if animations haven't triggered
+    setTimeout(() => {
+      const hiddenElements = document.querySelectorAll('[data-aos]:not(.aos-animate)');
+      hiddenElements.forEach(el => {
+        el.classList.add('aos-animate');
+      });
+    }, 1000);
   }
   
   setupLazyLoading() {

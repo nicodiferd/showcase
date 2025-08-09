@@ -224,11 +224,27 @@ export class Animations {
   setupScrollAnimations() {
     const animatedElements = document.querySelectorAll('[data-aos]');
     
+    // If no elements found, return early
+    if (!animatedElements.length) {
+      console.log('No AOS elements found');
+      return;
+    }
+    
+    // Check if IntersectionObserver is supported
+    if (!('IntersectionObserver' in window)) {
+      // Fallback: show all elements immediately
+      animatedElements.forEach(element => {
+        element.classList.add('aos-animate');
+      });
+      return;
+    }
+    
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          const animation = entry.target.getAttribute('data-aos');
-          entry.target.classList.add('aos-animate', animation);
+          // Add aos-animate class to trigger animation
+          entry.target.classList.add('aos-animate');
+          // Stop observing this element
           observer.unobserve(entry.target);
         }
       });
@@ -237,6 +253,19 @@ export class Animations {
       rootMargin: '50px'
     });
     
-    animatedElements.forEach(element => observer.observe(element));
+    // Start observing all elements
+    animatedElements.forEach(element => {
+      // Check if element is already in viewport on load
+      const rect = element.getBoundingClientRect();
+      const inViewport = rect.top < window.innerHeight && rect.bottom > 0;
+      
+      if (inViewport) {
+        // If already in viewport, animate immediately
+        element.classList.add('aos-animate');
+      } else {
+        // Otherwise, observe for when it comes into view
+        observer.observe(element);
+      }
+    });
   }
 }
