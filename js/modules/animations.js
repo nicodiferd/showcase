@@ -20,6 +20,17 @@ export class Animations {
     this.setupCounterAnimations();
     this.setupTypewriter();
     this.setupScrollAnimations();
+    
+    // Fallback: Force counter animations after 1 second if they haven't started
+    setTimeout(() => {
+      const counters = document.querySelectorAll('[data-counter]:not([data-animated])');
+      counters.forEach(counter => {
+        const target = parseInt(counter.getAttribute('data-counter'));
+        const suffix = counter.getAttribute('data-suffix') || '';
+        counter.textContent = target + suffix;
+        counter.setAttribute('data-animated', 'true');
+      });
+    }, 1000);
   }
   
   setupParticles() {
@@ -123,6 +134,8 @@ export class Animations {
   setupCounterAnimations() {
     const counters = document.querySelectorAll('[data-counter]');
     
+    if (counters.length === 0) return;
+    
     const animateCounter = (element) => {
       const target = parseInt(element.getAttribute('data-counter'));
       const suffix = element.getAttribute('data-suffix') || '';
@@ -140,17 +153,36 @@ export class Animations {
       }, 16);
     };
     
-    // Use Intersection Observer
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          animateCounter(entry.target);
-          observer.unobserve(entry.target);
+    // Simple approach: animate when visible
+    const checkAndAnimate = () => {
+      counters.forEach(counter => {
+        if (counter.hasAttribute('data-animated')) return;
+        
+        const rect = counter.getBoundingClientRect();
+        const inViewport = (
+          rect.top <= window.innerHeight &&
+          rect.bottom >= 0
+        );
+        
+        if (inViewport) {
+          animateCounter(counter);
+          counter.setAttribute('data-animated', 'true');
         }
       });
-    }, { threshold: 0.5 });
+    };
     
-    counters.forEach(counter => observer.observe(counter));
+    // Check on load
+    checkAndAnimate();
+    
+    // Check on scroll with throttling
+    let scrollTimeout;
+    window.addEventListener('scroll', () => {
+      if (scrollTimeout) return;
+      scrollTimeout = setTimeout(() => {
+        checkAndAnimate();
+        scrollTimeout = null;
+      }, 100);
+    });
   }
   
   setupTypewriter() {
