@@ -103,8 +103,10 @@ export class Animations {
   }
   
   setupCardTilt() {
-    const cards = document.querySelectorAll('.card');
-    
+    // Only enable tilt on cards that explicitly opt-in
+    const cards = document.querySelectorAll('.card[data-tilt]');
+    if (!cards.length) return;
+
     cards.forEach(card => {
       card.addEventListener('mousemove', (e) => {
         const rect = card.getBoundingClientRect();
