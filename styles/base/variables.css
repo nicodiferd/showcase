@@ -8,10 +8,10 @@
   --color-primary-dark: #cc0000;
   --color-primary-light: #ff6666;
   
-  /* Secondary Accent (Cyan) */
-  --color-secondary: #22d3ee;
-  --color-secondary-dark: #0891b2;
-  --color-secondary-light: #67e8f9;
+  /* Secondary Accent (Crimson) */
+  --color-secondary: #b30000;
+  --color-secondary-dark: #7a0000;
+  --color-secondary-light: #ff4d4d;
   
   /* Neutral Colors */
   --color-black: #000000;
@@ -93,7 +93,7 @@
   --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
   --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
   --shadow-glow: 0 0 20px rgba(255, 51, 51, 0.3);
-  --shadow-glow-secondary: 0 0 24px rgba(34, 211, 238, 0.25);
+  --shadow-glow-secondary: 0 0 24px rgba(179, 0, 0, 0.25);
   
   /* Transitions */
   --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
