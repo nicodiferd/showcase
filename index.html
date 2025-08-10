@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -35,9 +35,17 @@
     (function() {
       try {
         var saved = localStorage.getItem('preferredTheme') || 'system';
-        var system = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        var isLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+        var system = isLight ? 'light' : 'dark';
         var theme = saved === 'system' ? system : saved;
         document.documentElement.setAttribute('data-theme', theme);
+        if (theme === 'light') {
+          document.documentElement.classList.remove('dark');
+          document.documentElement.classList.add('light');
+        } else {
+          document.documentElement.classList.remove('light');
+          document.documentElement.classList.add('dark');
+        }
       } catch (e) {}
     })();
   </script>
@@ -378,7 +386,10 @@
               <span class="card__tag">Analytics</span>
             </div>
             <div class="card__actions">
-              <a href="#" class="card__link">
+              <a href="https://scorerush.org" 
+                 target="_blank" 
+                 rel="noopener noreferrer" 
+                 class="card__link">
                 <span>View Details</span>
                 <i class="fas fa-arrow-right card__link-icon"></i>
               </a>
