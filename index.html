@@ -94,7 +94,11 @@
       display: block !important;
     }
     
-    /* AOS animations are controlled via CSS/JS; no override here */
+    /* Override any hidden animations initially */
+    [data-aos] {
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
     
     /* Ensure navigation is visible */
     .navigation {
