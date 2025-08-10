@@ -291,8 +291,7 @@
   );
 }
 
-/* AOS variants DISABLED - causing visibility issues */
-/* 
+/* AOS visibility */
 [data-aos] {
   opacity: 0;
   transition-duration: 800ms;
@@ -302,7 +301,6 @@
 [data-aos].aos-animate {
   opacity: 1;
 }
-*/
 
 /* Fallback: Show content if animations fail to load */
 @media (prefers-reduced-motion: reduce) {
@@ -313,7 +311,7 @@
 }
 
 /* Show content after a timeout as fallback */
-body.loaded [data-aos] {
+body.loaded [data-aos]:not(.aos-animate) {
   animation: fadeInFallback 1s ease-out forwards;
   animation-delay: 2s;
 }
