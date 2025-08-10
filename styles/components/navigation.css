@@ -89,8 +89,8 @@
   left: 0;
   width: 0;
   height: 2px;
-  background: var(--color-primary);
-  transition: width var(--transition-base);
+  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+  transition: width var(--transition-base), transform var(--transition-base);
 }
 
 .navigation__link:hover {
@@ -99,6 +99,7 @@
 
 .navigation__link:hover::before {
   width: 100%;
+  transform: translateZ(0);
 }
 
 .navigation__link.active {

@@ -240,7 +240,11 @@
 
 /* Utilities */
 .gradient-text {
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+  background: linear-gradient(135deg,
+    var(--color-primary) 0%,
+    var(--color-secondary) 50%,
+    var(--color-primary-light) 100%
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -256,6 +260,31 @@
 /* Animations */
 [data-aos] {
   transition-property: transform, opacity;
+}
+[data-section-divider]::before,
+[data-section-divider]::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 80px;
+  pointer-events: none;
+}
+
+[data-section-divider]::before {
+  top: 0;
+  background: linear-gradient(to bottom,
+    rgba(255,255,255,0.04),
+    rgba(255,255,255,0)
+  );
+}
+
+[data-section-divider]::after {
+  bottom: 0;
+  background: linear-gradient(to top,
+    rgba(255,255,255,0.04),
+    rgba(255,255,255,0)
+  );
 }
 
 /* AOS variants DISABLED - causing visibility issues */
@@ -340,20 +369,20 @@ body.loaded [data-aos] {
 }
 
 [data-theme="light"] .glass {
-  background: rgba(0, 0, 0, 0.05);
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 [data-theme="light"] .card__image-overlay {
   background: linear-gradient(
     to bottom,
     transparent 0%,
-    rgba(255, 255, 255, 0.9) 100%
+    rgba(255, 255, 255, 0.85) 100%
   );
 }
 
 [data-theme="light"] .stat:hover {
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
 }
 
 /* Responsive */
