@@ -37,15 +37,15 @@ export class Animations {
     const particlesContainer = document.querySelector('.hero__particles');
     if (!particlesContainer) return;
     
-    const particleCount = 30;
+    const particleCount = 18;
     
     for (let i = 0; i < particleCount; i++) {
       const particle = document.createElement('div');
       particle.className = 'particle';
       
       // Random properties
-      const size = Math.random() * 4 + 2;
-      const duration = Math.random() * 20 + 10;
+      const size = Math.random() * 6 + 3;
+      const duration = Math.random() * 18 + 12;
       const delay = Math.random() * duration;
       const startX = Math.random() * 100;
       
@@ -103,8 +103,10 @@ export class Animations {
   }
   
   setupCardTilt() {
-    const cards = document.querySelectorAll('.card');
-    
+    // Only enable tilt on cards that explicitly opt-in
+    const cards = document.querySelectorAll('.card[data-tilt]');
+    if (!cards.length) return;
+
     cards.forEach(card => {
       card.addEventListener('mousemove', (e) => {
         const rect = card.getBoundingClientRect();

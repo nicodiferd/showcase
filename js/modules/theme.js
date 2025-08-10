@@ -8,7 +8,7 @@ export class ThemeManager {
     this.themeSelectors = document.querySelectorAll('[data-theme-selector]');
     this.root = document.documentElement;
     this.storageKey = 'preferredTheme';
-    this.defaultTheme = 'dark';
+    this.defaultTheme = 'system';
     
     this.themes = {
       system: { name: 'System', class: '' },
@@ -35,14 +35,14 @@ export class ThemeManager {
   setTheme(themeName, systemThemeName = this.getSystemThemeName()) {
     // Remove all theme classes
     Object.values(this.themes).forEach(theme => {
-      this.root.classList.remove(theme.class);
+      if (theme.class) this.root.classList.remove(theme.class);
     });
     
     // Add new theme class
     if (this.themes[themeName]) {
       const effectiveTheme = themeName === 'system' ? systemThemeName : themeName;
       const themeDef = this.themes[effectiveTheme];
-      if (themeDef.class) this.root.classList.add(themeDef.class);
+      if (themeDef?.class) this.root.classList.add(themeDef.class);
       this.root.setAttribute('data-theme', effectiveTheme);
       
       // Update selectors
