@@ -21,7 +21,7 @@ export class Animations {
     this.setupTypewriter();
     this.setupScrollAnimations();
     
-    // Fallback: Force counter animations after 1 second if they haven't started
+    // Fallback: Force counter animations after 1.5 seconds if they haven't started
     setTimeout(() => {
       const counters = document.querySelectorAll('[data-counter]:not([data-animated])');
       counters.forEach(counter => {
@@ -29,8 +29,9 @@ export class Animations {
         const suffix = counter.getAttribute('data-suffix') || '';
         counter.textContent = target + suffix;
         counter.setAttribute('data-animated', 'true');
+        console.log(`Fallback: Setting counter to ${target}${suffix}`);
       });
-    }, 1000);
+    }, 1500);
   }
   
   setupParticles() {
@@ -150,40 +151,40 @@ export class Animations {
         if (current >= target) {
           current = target;
           clearInterval(timer);
+          element.setAttribute('data-animated', 'true');
         }
         element.textContent = Math.floor(current) + suffix;
       }, 16);
     };
     
-    // Simple approach: animate when visible
-    const checkAndAnimate = () => {
-      counters.forEach(counter => {
-        if (counter.hasAttribute('data-animated')) return;
-        
-        const rect = counter.getBoundingClientRect();
-        const inViewport = (
-          rect.top <= window.innerHeight &&
-          rect.bottom >= 0
-        );
-        
-        if (inViewport) {
-          animateCounter(counter);
-          counter.setAttribute('data-animated', 'true');
+    // Use IntersectionObserver for better performance and reliability
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !entry.target.hasAttribute('data-animated')) {
+          animateCounter(entry.target);
+          entry.target.setAttribute('data-animated', 'true');
+          observer.unobserve(entry.target);
         }
       });
-    };
+    }, {
+      threshold: 0.1,
+      rootMargin: '50px'
+    });
     
-    // Check on load
-    checkAndAnimate();
-    
-    // Check on scroll with throttling
-    let scrollTimeout;
-    window.addEventListener('scroll', () => {
-      if (scrollTimeout) return;
-      scrollTimeout = setTimeout(() => {
-        checkAndAnimate();
-        scrollTimeout = null;
-      }, 100);
+    // Observe all counters
+    counters.forEach(counter => {
+      // Check if already in viewport on page load
+      const rect = counter.getBoundingClientRect();
+      const inViewport = rect.top < window.innerHeight && rect.bottom > 0;
+      
+      if (inViewport && !counter.hasAttribute('data-animated')) {
+        // Animate immediately if already visible
+        animateCounter(counter);
+        counter.setAttribute('data-animated', 'true');
+      } else if (!counter.hasAttribute('data-animated')) {
+        // Otherwise observe for when it comes into view
+        observer.observe(counter);
+      }
     });
   }
   
