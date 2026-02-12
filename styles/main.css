@@ -15,14 +15,14 @@
 
 /* Page Specific Styles */
 .about {
-  padding: var(--space-20) 0;
+  padding: var(--space-24) 0;
   background: var(--color-background-alt);
 }
 
 .about__container {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: var(--space-12);
+  gap: var(--space-16);
   align-items: center;
 }
 
@@ -103,7 +103,7 @@
 
 /* Projects Section */
 .projects {
-  padding: var(--space-20) 0;
+  padding: var(--space-24) 0;
   background: var(--color-background);
 }
 
@@ -124,7 +124,7 @@
 
 /* Contact Section */
 .contact {
-  padding: var(--space-20) 0;
+  padding: var(--space-24) 0;
   background: var(--color-background-alt);
 }
 

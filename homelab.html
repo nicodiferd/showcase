@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="HomeLab — self-hosted infrastructure, Proxmox, Cloudflare, and AI assistants. Built by Nicolo DiFerdinando.">
+  <title>HomeLab | Nicolo DiFerdinando</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/images/favicon.png">
+
+  <!-- Early theme to prevent flash -->
+  <script>
+    (function() {
+      try {
+        var saved = localStorage.getItem('preferredTheme') || 'system';
+        var isLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+        var system = isLight ? 'light' : 'dark';
+        var theme = saved === 'system' ? system : saved;
+        document.documentElement.setAttribute('data-theme', theme);
+        if (theme === 'light') {
+          document.documentElement.classList.remove('dark');
+          document.documentElement.classList.add('light');
+        } else {
+          document.documentElement.classList.remove('light');
+          document.documentElement.classList.add('dark');
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="styles/main.css?v=refresh-2">
+
+  <style>
+    /* HomeLab page specific styles */
+    .lab-hero {
+      min-height: 70vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      background: linear-gradient(135deg, var(--color-background) 0%, var(--color-background-alt) 100%);
+      overflow: hidden;
+      padding: var(--space-8) 0;
+    }
+
+    .lab-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 30% 40%, #1a3a5e 0%, transparent 50%),
+                  radial-gradient(circle at 70% 70%, #2a6496 0%, transparent 50%);
+      opacity: 0.15;
+    }
+
+    .lab-hero__content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    .lab-hero__icon {
+      font-size: 5rem;
+      color: #4a9eda;
+      margin-bottom: var(--space-6);
+      animation: float 6s ease-in-out infinite;
+      filter: drop-shadow(0 4px 20px rgba(74, 158, 218, 0.3));
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+
+    .lab-hero__title {
+      font-size: var(--text-5xl);
+      font-weight: var(--font-extrabold);
+      margin-bottom: var(--space-4);
+      background: linear-gradient(135deg, #ffffff 0%, #4a9eda 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .lab-hero__subtitle {
+      font-size: var(--text-xl);
+      color: var(--color-text-secondary);
+      max-width: 650px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    .lab-section {
+      padding: var(--space-20) 0;
+    }
+
+    .lab-section--alt {
+      background: var(--color-background-alt);
+    }
+
+    .lab-section__title {
+      font-size: var(--text-3xl);
+      margin-bottom: var(--space-8);
+    }
+
+    .lab-section__text {
+      font-size: var(--text-lg);
+      line-height: 1.8;
+      color: var(--color-text-secondary);
+      max-width: 800px;
+    }
+
+    .lab-section__text + .lab-section__text {
+      margin-top: var(--space-4);
+    }
+
+    .lab-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+      height: 100%;
+      transition: all var(--transition-base);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .lab-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, #1a3a5e, #4a9eda);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform var(--transition-base);
+    }
+
+    .lab-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+      border-color: #4a9eda;
+    }
+
+    .lab-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .lab-card__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--space-3);
+    }
+
+    .lab-card h3 {
+      color: var(--color-text-primary);
+      font-size: var(--text-lg);
+      margin-bottom: 0;
+    }
+
+    .lab-card p {
+      color: var(--color-text-secondary);
+      line-height: 1.7;
+      font-size: var(--text-sm);
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 2px 10px;
+      border-radius: var(--radius-full);
+      font-size: 0.7rem;
+      font-weight: var(--font-semibold);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .status-badge--active {
+      background: rgba(40, 167, 69, 0.15);
+      color: #28a745;
+      border: 1px solid rgba(40, 167, 69, 0.3);
+    }
+
+    .status-badge--active::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #28a745;
+      animation: pulse-dot 2s infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .status-badge--inactive {
+      background: rgba(108, 117, 125, 0.15);
+      color: #6c757d;
+      border: 1px solid rgba(108, 117, 125, 0.3);
+    }
+
+    .status-badge--planned {
+      background: rgba(255, 193, 7, 0.15);
+      color: #ffc107;
+      border: 1px solid rgba(255, 193, 7, 0.3);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--space-6);
+    }
+
+    .lab-card__icon {
+      font-size: 1.5rem;
+      margin-bottom: var(--space-3);
+      color: #4a9eda;
+    }
+
+    .hardware-specs {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--space-4);
+      margin-top: var(--space-8);
+    }
+
+    .spec-item {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-4);
+      text-align: center;
+    }
+
+    .spec-item__label {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: var(--space-2);
+    }
+
+    .spec-item__value {
+      font-size: var(--text-lg);
+      font-weight: var(--font-semibold);
+      color: var(--color-text-primary);
+    }
+
+    .cf-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: var(--space-4);
+      margin-top: var(--space-8);
+    }
+
+    .cf-stat {
+      text-align: center;
+      padding: var(--space-4);
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+    }
+
+    .cf-stat__number {
+      font-size: var(--text-3xl);
+      font-weight: var(--font-bold);
+      color: #f6821f;
+      margin-bottom: var(--space-1);
+    }
+
+    .cf-stat__label {
+      font-size: var(--text-sm);
+      color: var(--color-text-secondary);
+    }
+
+    .tech-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      margin-top: var(--space-6);
+    }
+
+    .tech-cloud__tag {
+      background: rgba(74, 158, 218, 0.1);
+      color: #6cb4e6;
+      padding: var(--space-1) var(--space-3);
+      border-radius: var(--radius-full);
+      font-size: var(--text-sm);
+      border: 1px solid rgba(74, 158, 218, 0.25);
+      transition: all var(--transition-fast);
+    }
+
+    .tech-cloud__tag:hover {
+      background: rgba(74, 158, 218, 0.2);
+      border-color: #4a9eda;
+    }
+
+    .ai-section {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-8);
+      margin-top: var(--space-8);
+    }
+
+    .ai-section h3 {
+      color: #4a9eda;
+      margin-bottom: var(--space-4);
+      font-size: var(--text-xl);
+    }
+
+    .ai-section p {
+      color: var(--color-text-secondary);
+      line-height: 1.7;
+    }
+
+    .ai-features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--space-4);
+      margin-top: var(--space-6);
+    }
+
+    .ai-feature {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      padding: var(--space-3);
+      background: var(--color-background-alt);
+      border-radius: var(--radius-md);
+    }
+
+    .ai-feature i {
+      color: #4a9eda;
+      font-size: var(--text-lg);
+    }
+
+    .ai-feature span {
+      font-size: var(--text-sm);
+      color: var(--color-text-secondary);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .lab-hero {
+        min-height: 60vh;
+      }
+
+      .lab-hero__title {
+        font-size: var(--text-3xl);
+      }
+
+      .lab-hero__icon {
+        font-size: 3.5rem;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hardware-specs {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .cf-stats {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .lab-section {
+        padding: var(--space-12) 0;
+      }
+    }
+
+    /* AOS animations */
+    [data-aos] {
+      opacity: 0;
+      transition-duration: 800ms;
+      transition-property: transform, opacity;
+    }
+
+    [data-aos].aos-animate {
+      opacity: 1;
+    }
+
+    [data-aos="fade-up"] {
+      transform: translateY(30px);
+    }
+
+    [data-aos="fade-up"].aos-animate {
+      transform: translateY(0);
+    }
+
+    [data-aos="fade-right"] {
+      transform: translateX(-30px);
+    }
+
+    [data-aos="fade-right"].aos-animate {
+      transform: translateX(0);
+    }
+
+    [data-aos="fade-left"] {
+      transform: translateX(30px);
+    }
+
+    [data-aos="fade-left"].aos-animate {
+      transform: translateX(0);
+    }
+
+    [data-aos="zoom-in"] {
+      transform: scale(0.8);
+    }
+
+    [data-aos="zoom-in"].aos-animate {
+      transform: scale(1);
+    }
+
+    /* Ensure content visible immediately */
+    body {
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navigation" id="navigation">
+    <div class="container navigation__container">
+      <a href="index.html" class="navigation__brand">ND</a>
+
+      <!-- Desktop Menu -->
+      <ul class="navigation__menu">
+        <li class="navigation__item">
+          <a href="index.html#about" class="navigation__link">About</a>
+        </li>
+        <li class="navigation__item">
+          <a href="index.html#projects" class="navigation__link">Projects</a>
+        </li>
+        <li class="navigation__item">
+          <a href="index.html#resume" class="navigation__link">Resume</a>
+        </li>
+        <li class="navigation__item">
+          <a href="index.html#certifications" class="navigation__link">Certifications</a>
+        </li>
+        <li class="navigation__item">
+          <a href="bandit.html" class="navigation__link">Bandit</a>
+        </li>
+        <li class="navigation__item">
+          <a href="index.html#contact" class="navigation__link">Contact</a>
+        </li>
+        <li class="navigation__item">
+          <select class="theme-selector" data-theme-selector aria-label="Theme selector">
+            <option value="system">System</option>
+            <option value="dark">Dark</option>
+            <option value="light">Light</option>
+          </select>
+        </li>
+      </ul>
+
+      <!-- Mobile Menu Toggle -->
+      <button class="navigation__toggle" aria-label="Toggle menu" aria-controls="mobileMenu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="navigation__mobile" id="mobileMenu" role="navigation" aria-label="Mobile navigation" aria-hidden="true">
+    <div class="navigation__mobile-header">
+      <span class="navigation__brand">ND</span>
+      <button class="navigation__toggle" aria-label="Close menu" aria-controls="mobileMenu" aria-expanded="false">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <ul class="navigation__mobile-menu">
+      <li class="navigation__mobile-item">
+        <a href="index.html#about" class="navigation__mobile-link">About</a>
+      </li>
+      <li class="navigation__mobile-item">
+        <a href="index.html#projects" class="navigation__mobile-link">Projects</a>
+      </li>
+      <li class="navigation__mobile-item">
+        <a href="index.html#resume" class="navigation__mobile-link">Resume</a>
+      </li>
+      <li class="navigation__mobile-item">
+        <a href="index.html#certifications" class="navigation__mobile-link">Certifications</a>
+      </li>
+      <li class="navigation__mobile-item">
+        <a href="bandit.html" class="navigation__mobile-link">Bandit</a>
+      </li>
+      <li class="navigation__mobile-item">
+        <a href="index.html#contact" class="navigation__mobile-link">Contact</a>
+      </li>
+      <li class="navigation__mobile-item">
+        <select class="theme-selector" data-theme-selector aria-label="Theme selector">
+          <option value="system">System</option>
+          <option value="dark">Dark</option>
+          <option value="light">Light</option>
+        </select>
+      </li>
+    </ul>
+  </div>
+  <div class="navigation__overlay"></div>
+
+  <main>
+  <!-- Hero Section -->
+  <section class="lab-hero">
+    <div class="container">
+      <div class="lab-hero__content" data-aos="zoom-in">
+        <div class="lab-hero__icon">
+          <i class="fas fa-server"></i>
+        </div>
+        <h1 class="lab-hero__title">I Built My Own Cloud</h1>
+        <p class="lab-hero__subtitle">
+          A dedicated server, a pile of containers, and the belief that the best way to learn infrastructure
+          is to run your own.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Overview Section -->
+  <section class="lab-section lab-section--alt">
+    <div class="container">
+      <h2 class="lab-section__title gradient-text" data-aos="fade-up">Why Self-Host?</h2>
+      <p class="lab-section__text" data-aos="fade-up">
+        Cloud providers make things easy. Maybe too easy. I wanted to understand what's actually
+        happening underneath — networking, storage, virtualization, DNS, tunneling — all of it.
+        The homelab is where I break things on purpose so I can fix them on purpose.
+      </p>
+      <p class="lab-section__text" data-aos="fade-up">
+        It's also just more fun. Running your own infrastructure means you own the whole stack.
+        No vendor lock-in, no surprise bills, no rate limits. Just a box in my room and a lot of SSH sessions.
+      </p>
+    </div>
+  </section>
+
+  <!-- Hardware Section -->
+  <section class="lab-section">
+    <div class="container">
+      <h2 class="lab-section__title gradient-text" data-aos="fade-up">Hardware</h2>
+      <p class="lab-section__text" data-aos="fade-up">
+        The foundation: a single dedicated tower running Proxmox VE as the hypervisor.
+      </p>
+
+      <div class="hardware-specs" data-aos="fade-up">
+        <div class="spec-item">
+          <div class="spec-item__label">CPU</div>
+          <div class="spec-item__value">AMD Ryzen 9 5900X</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-item__label">Memory</div>
+          <div class="spec-item__value">32 GB RAM</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-item__label">Hypervisor</div>
+          <div class="spec-item__value">Proxmox VE</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-item__label">Storage</div>
+          <div class="spec-item__value">ZFS Mirrored + LVM</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="lab-section lab-section--alt">
+    <div class="container">
+      <h2 class="lab-section__title gradient-text" data-aos="fade-up">Services</h2>
+      <p class="lab-section__text" data-aos="fade-up">
+        VMs and containers running various workloads — from automation to personal tools.
+      </p>
+
+      <div class="services-grid" style="margin-top: var(--space-8);" data-aos="fade-up">
+        <div class="lab-card">
+          <div class="lab-card__icon"><i class="fas fa-chart-line"></i></div>
+          <div class="lab-card__header">
+            <h3>Traderbot</h3>
+            <span class="status-badge status-badge--active">Running</span>
+          </div>
+          <p>Windows 11 VM running automated trading workflows. Runs 24/7 with monitoring and alerts.</p>
+        </div>
+
+        <div class="lab-card">
+          <div class="lab-card__icon"><i class="fas fa-network-wired"></i></div>
+          <div class="lab-card__header">
+            <h3>Tailscale VPN</h3>
+            <span class="status-badge status-badge--active">Running</span>
+          </div>
+          <p>Mesh VPN connecting all devices into a private network. Secure remote access to the homelab from anywhere.</p>
+        </div>
+
+        <div class="lab-card">
+          <div class="lab-card__icon"><i class="fas fa-images"></i></div>
+          <div class="lab-card__header">
+            <h3>Immich Photo Store</h3>
+            <span class="status-badge status-badge--inactive">Stopped</span>
+          </div>
+          <p>Self-hosted Google Photos alternative with AI-powered face recognition and automatic backup.</p>
+        </div>
+
+        <div class="lab-card">
+          <div class="lab-card__icon"><i class="fas fa-project-diagram"></i></div>
+          <div class="lab-card__header">
+            <h3>n8n Workflows</h3>
+            <span class="status-badge status-badge--active">Running</span>
+          </div>
+          <p>Open-source workflow automation platform. Connects APIs and services for custom automations.</p>
+        </div>
+
+        <div class="lab-card">
+          <div class="lab-card__icon"><i class="fas fa-shield-alt"></i></div>
+          <div class="lab-card__header">
+            <h3>PiHole DNS</h3>
+            <span class="status-badge status-badge--active">Running</span>
+          </div>
+          <p>Network-level ad blocker and DNS sinkhole. Handles network-wide privacy and tracking protection.</p>
+        </div>
+
+        <div class="lab-card">
+          <div class="lab-card__icon"><i class="fas fa-database"></i></div>
+          <div class="lab-card__header">
+            <h3>ClickHouse</h3>
+            <span class="status-badge status-badge--inactive">Stopped</span>
+          </div>
+          <p>Column-oriented data warehouse for analytics workloads. Used for experimenting with large dataset queries.</p>
+        </div>
+
+        <div class="lab-card">
+          <div class="lab-card__icon"><i class="fas fa-robot"></i></div>
+          <div class="lab-card__header">
+            <h3>ClawdBot</h3>
+            <span class="status-badge status-badge--active">Running</span>
+          </div>
+          <p>Self-hosted AI assistant with Discord integration, SSH access to the homelab, and custom tooling.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cloudflare Infrastructure Section -->
+  <section class="lab-section">
+    <div class="container">
+      <h2 class="lab-section__title gradient-text" data-aos="fade-up">Cloudflare Infrastructure</h2>
+      <p class="lab-section__text" data-aos="fade-up">
+        Cloudflare is the connective tissue. Tunnels expose homelab services to the internet without opening ports.
+        Pages hosts static sites. R2 handles storage. DNS ties it all together.
+      </p>
+
+      <div class="cf-stats" data-aos="fade-up">
+        <div class="cf-stat">
+          <div class="cf-stat__number">7</div>
+          <div class="cf-stat__label">Domains</div>
+        </div>
+        <div class="cf-stat">
+          <div class="cf-stat__number">6</div>
+          <div class="cf-stat__label">Tunnels</div>
+        </div>
+        <div class="cf-stat">
+          <div class="cf-stat__number">6</div>
+          <div class="cf-stat__label">Pages Sites</div>
+        </div>
+        <div class="cf-stat">
+          <div class="cf-stat__number">2</div>
+          <div class="cf-stat__label">R2 Buckets</div>
+        </div>
+      </div>
+
+      <p class="lab-section__text" style="margin-top: var(--space-8);" data-aos="fade-up">
+        Each tunnel connects a local service to a public hostname through Cloudflare's network — no port forwarding,
+        no exposed IP, just encrypted connections through their edge. It's the closest thing to zero-trust networking
+        you can get for free.
+      </p>
+    </div>
+  </section>
+
+  <!-- AI Infrastructure Section -->
+  <section class="lab-section lab-section--alt">
+    <div class="container">
+      <h2 class="lab-section__title gradient-text" data-aos="fade-up">AI Infrastructure</h2>
+      <p class="lab-section__text" data-aos="fade-up">
+        The homelab doubles as an AI playground. ClawdBot (aka Jarvis) is a self-hosted assistant
+        that lives on the server and connects to everything.
+      </p>
+
+      <div class="ai-section" data-aos="fade-up">
+        <h3><i class="fas fa-robot" style="margin-right: var(--space-2);"></i> ClawdBot / Jarvis</h3>
+        <p>
+          Clawd is Nicolo's AI assistant — the red-shelled operator running in the background. Not a generic chatbot.
+          It has context on active projects and aims to be actually useful rather than just pleasant. Sharp first, witty second.
+        </p>
+        <p style="margin-top: var(--space-3);">
+          It handles automation and tooling, research and answers, Discord server management,
+          and general ops — calendar, reminders, file organization, whatever needs doing.
+        </p>
+
+        <div class="ai-features">
+          <div class="ai-feature">
+            <i class="fab fa-discord"></i>
+            <span>Discord Integration</span>
+          </div>
+          <div class="ai-feature">
+            <i class="fas fa-terminal"></i>
+            <span>SSH Homelab Access</span>
+          </div>
+          <div class="ai-feature">
+            <i class="fas fa-tools"></i>
+            <span>Custom Tool Calling</span>
+          </div>
+          <div class="ai-feature">
+            <i class="fas fa-brain"></i>
+            <span>Context-Aware Responses</span>
+          </div>
+          <div class="ai-feature">
+            <i class="fas fa-bell"></i>
+            <span>Alert Monitoring</span>
+          </div>
+          <div class="ai-feature">
+            <i class="fas fa-code"></i>
+            <span>Code Execution</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ai-section" data-aos="fade-up" style="margin-top: var(--space-6);">
+        <h3><i class="fas fa-shield-alt" style="margin-right: var(--space-2);"></i> Discord Server Security</h3>
+        <p>
+          The Discord server runs server-wide 2FA for all moderators with admin permissions.
+          Anyone with kick/ban/manage powers needs 2FA enabled on their account — protects against
+          compromised mod accounts and keeps the server locked down.
+        </p>
+
+        <div class="ai-features" style="margin-top: var(--space-4);">
+          <div class="ai-feature">
+            <i class="fas fa-lock"></i>
+            <span>Server-Wide 2FA Required</span>
+          </div>
+          <div class="ai-feature">
+            <i class="fas fa-key"></i>
+            <span>Authenticator App Enforced</span>
+          </div>
+          <div class="ai-feature">
+            <i class="fas fa-user-shield"></i>
+            <span>Mod Permission Gating</span>
+          </div>
+          <div class="ai-feature">
+            <i class="fas fa-save"></i>
+            <span>Backup Code Recovery</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tech Stack Section -->
+  <section class="lab-section">
+    <div class="container">
+      <h2 class="lab-section__title gradient-text" data-aos="fade-up">Tech Stack</h2>
+      <p class="lab-section__text" data-aos="fade-up">
+        Everything that keeps the lab running.
+      </p>
+
+      <div class="tech-cloud" data-aos="fade-up">
+        <span class="tech-cloud__tag">Proxmox VE</span>
+        <span class="tech-cloud__tag">ZFS</span>
+        <span class="tech-cloud__tag">LVM</span>
+        <span class="tech-cloud__tag">Docker</span>
+        <span class="tech-cloud__tag">Linux</span>
+        <span class="tech-cloud__tag">Windows Server</span>
+        <span class="tech-cloud__tag">Cloudflare Tunnels</span>
+        <span class="tech-cloud__tag">Cloudflare Pages</span>
+        <span class="tech-cloud__tag">Cloudflare R2</span>
+        <span class="tech-cloud__tag">Cloudflare DNS</span>
+        <span class="tech-cloud__tag">Tailscale</span>
+        <span class="tech-cloud__tag">n8n</span>
+        <span class="tech-cloud__tag">Immich</span>
+        <span class="tech-cloud__tag">ClickHouse</span>
+        <span class="tech-cloud__tag">PiHole</span>
+        <span class="tech-cloud__tag">Python</span>
+        <span class="tech-cloud__tag">Node.js</span>
+        <span class="tech-cloud__tag">Bash</span>
+        <span class="tech-cloud__tag">SSH</span>
+        <span class="tech-cloud__tag">Discord.py</span>
+        <span class="tech-cloud__tag">Claude API</span>
+        <span class="tech-cloud__tag">Nginx</span>
+      </div>
+    </div>
+  </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer__container">
+      <p class="footer__text">&copy; 2026 Nicolo DiFerdinando | Cal Poly San Luis Obispo</p>
+      <div class="footer__socials">
+        <a href="index.html"
+           class="footer__social"
+           aria-label="Portfolio">
+          <i class="fas fa-home"></i>
+        </a>
+        <a href="https://github.com/nicodiferd"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="footer__social"
+           aria-label="GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/nicolo-diferdinando/"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="footer__social"
+           aria-label="LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="mailto:nicodiferd@gmail.com"
+           class="footer__social"
+           aria-label="Email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script type="module" src="js/app.js?v=refresh-2"></script>
+
+  <!-- AOS implementation -->
+  <script>
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '50px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('aos-animate');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const animatedElements = document.querySelectorAll('[data-aos]');
+      animatedElements.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          el.classList.add('aos-animate');
+        } else {
+          observer.observe(el);
+        }
+      });
+      document.body.classList.add('loaded');
+    });
+  </script>
+</body>
+</html>
