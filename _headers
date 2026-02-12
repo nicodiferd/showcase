@@ -22,4 +22,4 @@
 
 /*.pdf
   Content-Type: application/pdf
-  Content-Disposition: inline 
+  Content-Disposition: attachment; filename="Nicolo_DiFerdinando_Resume.pdf" 
