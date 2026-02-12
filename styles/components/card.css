@@ -181,25 +181,27 @@
 }
 
 /* Icon Card Variant */
-.card--icon-card .card__icon-hero {
-  height: 240px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 4rem;
-  color: rgba(255, 255, 255, 0.9);
+.card.card--icon-card .card__icon-hero {
+  min-height: 200px;
+  height: 200px;
+  width: 100%;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
   position: relative;
   overflow: hidden;
 }
 
-.card--icon-card .card__icon-hero i {
+.card.card--icon-card .card__icon-hero i {
   position: relative;
   z-index: 1;
+  font-size: 4.5rem;
+  color: rgba(255, 255, 255, 0.9);
   transition: transform var(--transition-base);
-  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
 }
 
-.card--icon-card:hover .card__icon-hero i {
+.card.card--icon-card:hover .card__icon-hero i {
   transform: scale(1.15);
 }
 
