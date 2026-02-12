@@ -107,6 +107,40 @@
       visibility: visible !important;
       display: flex !important;
     }
+
+    /* Icon card hero area */
+    .card.card--icon-card .card__icon-hero {
+      min-height: 200px;
+      height: 200px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card.card--icon-card .card__icon-hero i {
+      font-size: 4.5rem;
+      color: rgba(255, 255, 255, 0.9);
+      filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
+      transition: transform 0.3s ease;
+    }
+
+    .card.card--icon-card:hover .card__icon-hero i {
+      transform: scale(1.15);
+    }
+
+    .card__link--coming-soon {
+      color: var(--color-text-muted, #999) !important;
+      pointer-events: none;
+      cursor: default;
+      opacity: 0.7;
+    }
+
+    .card__link--coming-soon .card__link-icon {
+      display: none;
+    }
   </style>
   
   <!-- Noscript fallback styles -->
