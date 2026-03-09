@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css');
+
+:root {
+  /* NicoOS Color Palette */
+  --bg-primary: #0a0a0f;
+  --bg-secondary: #12121a;
+  --bg-surface: #1a1a25;
+  --bg-surface-hover: #22222f;
+  --bg-window: #0e0e16;
+  --bg-titlebar: #16161f;
+  --bg-taskbar: #0c0c12;
+
+  /* Accent colors */
+  --accent-primary: #00ff88;
+  --accent-secondary: #ffaa00;
+  --accent-tertiary: #00aaff;
+  --accent-danger: #ff4444;
+  --accent-dim: rgba(0, 255, 136, 0.15);
+  --accent-glow: rgba(0, 255, 136, 0.08);
+
+  /* Text */
+  --text-primary: #e0e0e8;
+  --text-secondary: #8888a0;
+  --text-muted: #555568;
+  --text-accent: var(--accent-primary);
+
+  /* Borders */
+  --border-color: #2a2a3a;
+  --border-active: var(--accent-primary);
+  --border-subtle: #1e1e2a;
+
+  /* Shadows */
+  --shadow-window: 4px 4px 0 rgba(0, 255, 136, 0.1);
+  --shadow-window-active: 6px 6px 0 rgba(0, 255, 136, 0.15);
+  --shadow-popup: 0 8px 32px rgba(0, 0, 0, 0.6);
+
+  /* Sizing */
+  --taskbar-height: 40px;
+  --titlebar-height: 32px;
+  --icon-size: 80px;
+  --border-width: 1px;
+
+  /* Animation */
+  --transition-fast: 0.15s ease;
+  --transition-base: 0.25s ease;
+
+  /* Z-layers */
+  --z-desktop: 1;
+  --z-window-base: 100;
+  --z-taskbar: 10000;
+  --z-start-menu: 10001;
+  --z-boot: 99999;
+}

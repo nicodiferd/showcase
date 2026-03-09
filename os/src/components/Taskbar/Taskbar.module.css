@@ -1,0 +1,100 @@
+.taskbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: var(--taskbar-height);
+  background: var(--bg-taskbar);
+  border-top: var(--border-width) solid var(--border-color);
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  gap: 4px;
+  z-index: var(--z-taskbar);
+}
+
+.startBtn {
+  height: 28px;
+  padding: 0 12px;
+  background: transparent;
+  border: var(--border-width) solid var(--border-color);
+  color: var(--accent-primary);
+  font-size: 11px;
+  font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.1em;
+  transition: all var(--transition-fast);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.startBtn:hover {
+  background: var(--accent-dim);
+  border-color: var(--accent-primary);
+}
+
+.startBtn.active {
+  background: var(--accent-dim);
+  border-color: var(--accent-primary);
+}
+
+.divider {
+  width: 1px;
+  height: 20px;
+  background: var(--border-color);
+  margin: 0 4px;
+}
+
+.windowButtons {
+  display: flex;
+  gap: 2px;
+  flex: 1;
+  overflow-x: auto;
+}
+
+.windowBtn {
+  height: 28px;
+  padding: 0 12px;
+  background: transparent;
+  border: var(--border-width) solid var(--border-color);
+  color: var(--text-secondary);
+  font-size: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  max-width: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: all var(--transition-fast);
+}
+
+.windowBtn:hover {
+  background: var(--bg-surface-hover);
+  color: var(--text-primary);
+}
+
+.windowBtn.activeWindow {
+  background: var(--accent-dim);
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+}
+
+.windowBtn.minimized {
+  opacity: 0.5;
+}
+
+.tray {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: auto;
+}
+
+.clock {
+  font-size: 11px;
+  color: var(--text-secondary);
+  letter-spacing: 0.05em;
+  font-variant-numeric: tabular-nums;
+}

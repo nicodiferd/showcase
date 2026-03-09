@@ -1,0 +1,12 @@
+{
+	"name": "nicoos",
+	"compatibility_date": "2025-06-05",
+	"assets": { "directory": "./dist" },
+	"workers_dev": true,
+	"routes": [
+		{
+			"pattern": "os.nicolod.org/*",
+			"zone_name": "nicolod.org"
+		}
+	]
+}

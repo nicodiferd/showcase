@@ -1,0 +1,45 @@
+.desktop {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - var(--taskbar-height));
+  background: var(--bg-primary);
+  overflow: hidden;
+}
+
+.desktop::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(0, 255, 136, 0.03) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(0, 170, 255, 0.02) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.iconGrid {
+  position: relative;
+  z-index: var(--z-desktop);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 20px;
+  height: 100%;
+  align-content: flex-start;
+}
+
+.watermark {
+  position: absolute;
+  bottom: 60px;
+  right: 24px;
+  font-size: 12px;
+  color: var(--text-muted);
+  opacity: 0.3;
+  z-index: 0;
+  pointer-events: none;
+  text-align: right;
+  line-height: 1.6;
+}
