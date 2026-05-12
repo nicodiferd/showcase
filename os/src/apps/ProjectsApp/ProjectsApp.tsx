@@ -3,7 +3,7 @@ import s from '../app-styles.module.css';
 const projects = [
   {
     name: 'Flora',
-    desc: 'Building something new. Details under NDA — more to share soon.',
+    desc: 'Building something new. Details under NDA, with more to share soon.',
     tags: ['Research', 'HCI', 'NDA'],
     link: null,
     linkText: 'Coming Soon',

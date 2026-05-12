@@ -12,12 +12,12 @@ export function AboutApp() {
       </div>
 
       <p className={s.text}>
-        I'm Nicolo — 23, based out of Newport Beach California, educated at Cal Poly San Luis Obispo,
+        I'm Nicolo. 23, based out of Newport Beach California, educated at Cal Poly San Luis Obispo,
         and genuinely bad at picking one thing. I've co-founded a startup, completed 3 internships,
         play club baseball, and somehow still find time to build things that probably don't need to exist yet.
       </p>
       <p className={s.text}>
-        I like building — automations of repetitive tasks, personal applications and iOS apps,
+        I like building things: automations of repetitive tasks, personal applications and iOS apps,
         infrastructure, research and knowledge bases, startups, whatever scratches the itch.
         Industrial Engineering major by degree, builder by default.
       </p>

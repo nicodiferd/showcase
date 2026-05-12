@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="HomeLab — a year and a half of Proxmox, pfSense, ClickHouse observability, and fleet-wide automation. Built by Nicolo DiFerdinando.">
+  <meta name="description" content="HomeLab: a year and a half of Proxmox, pfSense, ClickHouse observability, and fleet-wide automation. Built by Nicolo DiFerdinando.">
   <title>HomeLab | Nicolo DiFerdinando</title>
 
   <!-- Favicon -->
@@ -36,7 +36,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
   <!-- Main Stylesheet -->
-  <link rel="stylesheet" href="styles/main.css?v=refresh-2">
+  <link rel="stylesheet" href="styles/main.css?v=light-audit-6">
 
   <style>
     /* HomeLab page specific styles */
@@ -606,6 +606,82 @@
       opacity: 1 !important;
       visibility: visible !important;
     }
+
+    /* ===== Light-mode adjustments ===== */
+    /* Title gradient starts at white -> blue, which is invisible on a white
+       page. Swap the start color for a dark tone so the heading reads. */
+    [data-theme="light"] .lab-hero__title {
+      background: linear-gradient(135deg, #0b2236 0%, #1a6fb0 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Light radial wash needs more presence on a white background */
+    [data-theme="light"] .lab-hero::before {
+      opacity: 0.08;
+    }
+
+    /* Tech-cloud tags use a pale blue on a pale blue wash - washed out in
+       light mode. Switch text to a darker blue for contrast. */
+    [data-theme="light"] .tech-cloud__tag {
+      background: rgba(26, 111, 176, 0.08);
+      color: #1a4d7a;
+      border-color: rgba(26, 111, 176, 0.3);
+    }
+
+    [data-theme="light"] .tech-cloud__tag:hover {
+      background: rgba(26, 111, 176, 0.16);
+      border-color: #1a6fb0;
+    }
+
+    /* AI-section accent heading too pale on white */
+    [data-theme="light"] .ai-section h3,
+    [data-theme="light"] .lab-card__icon,
+    [data-theme="light"] .lab-hero__icon,
+    [data-theme="light"] .lab-timeline__era {
+      color: #1a4d7a;
+    }
+
+    /* Timeline rail / dots - soft blue is hard to see on white */
+    [data-theme="light"] .lab-timeline::before {
+      background: #1a6fb0;
+      opacity: 0.25;
+    }
+
+    [data-theme="light"] .lab-timeline__item::before {
+      background: #1a6fb0;
+    }
+
+    /* Lab-card hover border + bar use a light blue too. Use a darker tone. */
+    [data-theme="light"] .lab-card:hover {
+      border-color: #1a6fb0;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    }
+
+    [data-theme="light"] .lab-card::before {
+      background: linear-gradient(90deg, #0b2236, #1a6fb0);
+    }
+
+    /* Status badge colors stay on-brand in both themes; planned (yellow) needs
+       a darker text in light mode to clear AA contrast on a pale yellow wash. */
+    [data-theme="light"] .status-badge--planned {
+      color: #8a5a00;
+      border-color: rgba(255, 193, 7, 0.5);
+    }
+
+    [data-theme="light"] .status-badge--inactive {
+      color: #5a5f66;
+      border-color: rgba(108, 117, 125, 0.4);
+    }
+
+    [data-theme="light"] .status-badge--active {
+      color: #1a7a3a;
+      border-color: rgba(40, 167, 69, 0.4);
+    }
+
+    /* The terminal-style .readout is intentionally a fixed dark "console"
+       panel and is preserved in both themes - no override. */
   </style>
 </head>
 <body>
@@ -712,8 +788,8 @@
     <div class="container">
       <h2 class="lab-section__title gradient-text" data-aos="fade-up">The Short Version</h2>
       <p class="lab-section__text" data-aos="fade-up">
-        I've been running a Proxmox homelab for about a year and a half. It didn't start as a "homelab" —
-        it started as one container doing one useful thing. Every era since has been driven by a concrete
+        I've been running a Proxmox homelab for about a year and a half. It didn't start as a "homelab."
+        It started as one container doing one useful thing. Every era since has been driven by a concrete
         problem I wanted to solve, or a piece of infrastructure I wanted to stop misunderstanding.
       </p>
       <p class="lab-section__text" data-aos="fade-up">
@@ -733,7 +809,7 @@
           <div class="lab-timeline__era">Late 2024 · Rosita</div>
           <div class="lab-timeline__title">The Beginning</div>
           <p class="lab-timeline__text">
-            Installed Proxmox on a spare box at Rosita — the house my roommates and I named.
+            Installed Proxmox on a spare box at Rosita, the house my roommates and I named.
             First CT was Tailscale, so I could VPN into the apartment from anywhere. Second CT was Pi-hole,
             running network-wide DNS ad-blocking for the whole place. That was the entire lab for a while:
             two containers doing useful household work.
@@ -745,7 +821,7 @@
           <div class="lab-timeline__title">Someone Else Depends On It</div>
           <p class="lab-timeline__text">
             Spun up a Windows 11 VM for my roommate Matthew to run his trading automations.
-            First time the lab was serving someone besides me — and the first time an outage actually
+            First time the lab was serving someone besides me, and the first time an outage actually
             mattered to anyone else. Uptime stopped being theoretical.
           </p>
         </div>
@@ -769,7 +845,7 @@
           </p>
           <ul class="lab-timeline__list">
             <li><strong>n8n</strong> (LXC) for scheduled automation, including a weekly apt-upgrade job that SSHes into every host in the fleet.</li>
-            <li><strong>ntopng</strong> for flow-level network visibility — finally being able to see what my network was actually doing.</li>
+            <li><strong>ntopng</strong> for flow-level network visibility. Finally being able to see what my network was actually doing.</li>
             <li><strong>Home Assistant Green</strong> (physical device) for home automation.</li>
             <li><strong>Samba video share</strong> (LXC) as a macOS-friendly editing scratch volume.</li>
           </ul>
@@ -785,7 +861,7 @@
             <li>Migrated the network off a consumer R9000 router onto <strong>pfSense CE 2.7.2</strong> running as a VM. Configured VLANs for LAN, IoT, Servers, and Guest. Cutover was April 13.</li>
             <li>Redesigned the IP scheme from scattered (.9, .12, .14, .17–.20) to sequential (.2–.11) with DHCP static reservations for every service. Every host has a predictable address now.</li>
             <li>Built a <strong>ClickHouse + Grafana</strong> observability stack from scratch. ClickHouse on a dedicated 200 GiB disk, database <code>homelab</code>. Grafana CT with provisioned dashboards: "Host Overview" and "Outage Timeline."</li>
-            <li>Exposed ClickHouse publicly via <strong>Cloudflare Tunnel</strong> at <code>clickhouse.nicolod.org</code>, gated to an INSERT-only user. Pivoted here from Tailscale Funnel after discovering it blocks datacenter egress — which had been silently breaking my heartbeat Worker.</li>
+            <li>Exposed ClickHouse publicly via <strong>Cloudflare Tunnel</strong> at <code>clickhouse.nicolod.org</code>, gated to an INSERT-only user. Pivoted here from Tailscale Funnel after discovering it blocks datacenter egress, which had been silently breaking my heartbeat Worker.</li>
           </ul>
           <p class="lab-timeline__text">
             The heartbeat itself: a Cloudflare Worker (<code>homelab-heartbeat</code>) runs cron-every-minute
@@ -839,12 +915,12 @@
 
       <p class="lab-section__text" style="margin-top: var(--space-10);" data-aos="fade-up">
         <strong>Fleet-wide SSH</strong>: my ed25519 key is authorized on every CT and VM I operate, so I can hop into
-        any service from my workstation with zero friction. Different users per host — CTs use <code>root@</code>,
+        any service from my workstation with zero friction. Different users per host: CTs use <code>root@</code>,
         VMs use non-root service accounts like <code>clickhouse@</code> and <code>devhost@</code>.
       </p>
       <p class="lab-section__text" data-aos="fade-up">
         <strong>No port-forwarding, no exposed IP.</strong> Cloudflare Tunnel is the only public ingress.
-        Everything is version-controlled configs with explicit rollback plans — I've learned the hard way that
+        Everything is version-controlled configs with explicit rollback plans. I've learned the hard way that
         "I'll remember how I set this up" is a lie.
       </p>
     </div>
@@ -883,7 +959,7 @@
             <h3>Grafana</h3>
             <span class="status-badge status-badge--active">Running</span>
           </div>
-          <p>LXC with provisioned dashboards — "Host Overview" and "Outage Timeline" — backed by the ClickHouse native-protocol datasource.</p>
+          <p>LXC with provisioned dashboards ("Host Overview" and "Outage Timeline") backed by the ClickHouse native-protocol datasource.</p>
         </div>
 
         <div class="lab-card">
@@ -937,7 +1013,7 @@
             <h3>Immich</h3>
             <span class="status-badge status-badge--active">Running</span>
           </div>
-          <p>Self-hosted photo backup — baseball team library + a dedicated 300 GiB volume for personal photos.</p>
+          <p>Self-hosted photo backup: baseball team library plus a dedicated 300 GiB volume for personal photos.</p>
         </div>
 
         <div class="lab-card">
@@ -946,7 +1022,7 @@
             <h3>Home Assistant Green</h3>
             <span class="status-badge status-badge--active">Running</span>
           </div>
-          <p>Physical device for home automation. Not a VM — a dedicated box living on the IoT VLAN.</p>
+          <p>Physical device for home automation. Not a VM, but a dedicated box living on the IoT VLAN.</p>
         </div>
 
         <div class="lab-card">
@@ -975,15 +1051,15 @@
     <div class="container">
       <h2 class="lab-section__title gradient-text" data-aos="fade-up">Observability</h2>
       <p class="lab-section__text" data-aos="fade-up">
-        The goal: stop guessing whether the lab is healthy. Three pieces work together — a time-series warehouse
+        The goal: stop guessing whether the lab is healthy. Three pieces work together: a time-series warehouse
         I control (ClickHouse), a dashboard layer (Grafana), and an external heartbeat that verifies the lab
         from outside itself (Cloudflare Worker).
       </p>
       <p class="lab-section__text" data-aos="fade-up">
         The whole reason ClickHouse is publicly reachable is so my heartbeat Worker can insert into it.
         The auth posture is narrow on purpose: one Cloudflare Tunnel hostname (<code>clickhouse.nicolod.org</code>),
-        authenticated as an <strong>INSERT-only user</strong>. No SELECT, no DROP, no schema access —
-        nothing a leaked credential could exfiltrate.
+        authenticated as an <strong>INSERT-only user</strong>. No SELECT, no DROP, no schema access.
+        Nothing a leaked credential could exfiltrate.
       </p>
 
       <div class="auto-grid" data-aos="fade-up">
@@ -1000,7 +1076,7 @@
         <div class="lab-card">
           <div class="lab-card__icon"><i class="fas fa-heartbeat"></i></div>
           <h3>homelab-heartbeat (Cloudflare Worker)</h3>
-          <p>Cron-every-minute Worker that inserts a row over Cloudflare Tunnel. External verification — if the Worker stops inserting, I know before the lab realizes it's down.</p>
+          <p>Cron-every-minute Worker that inserts a row over Cloudflare Tunnel. External verification: if the Worker stops inserting, I know before the lab realizes it's down.</p>
         </div>
       </div>
     </div>
@@ -1024,7 +1100,7 @@
         <div class="lab-card">
           <div class="lab-card__icon"><i class="fas fa-sync-alt"></i></div>
           <h3>Weekly Fleet Upgrade</h3>
-          <p>SSHes into every capable CT and VM, runs <code>apt update &amp;&amp; apt upgrade</code>, reports back. Kernel and dependency drift is a boring problem — automation is the right answer.</p>
+          <p>SSHes into every capable CT and VM, runs <code>apt update &amp;&amp; apt upgrade</code>, reports back. Kernel and dependency drift is a boring problem, and automation is the right answer.</p>
         </div>
       </div>
 
@@ -1032,7 +1108,7 @@
 <div class="readout__header">
   <span class="readout__dots"><span></span><span></span><span></span></span>
   <span>daily-report · n8n · sample</span>
-</div>🟢 Homelab Daily — Apr 18, 2026, 9:00 AM
+</div>🟢 Homelab Daily · Apr 18, 2026, 9:00 AM
 Status: OK · 0 warning · 0 critical
 
 🖥️  Hosts &amp; Health
@@ -1082,7 +1158,7 @@ immich (expected), arbitrage-bot (expected)</div>
       </ul>
 
       <p class="lab-section__text" style="margin-top: var(--space-8);" data-aos="fade-up">
-        I pivoted here from Tailscale Funnel after finding out it blocks datacenter egress — which silently
+        I pivoted here from Tailscale Funnel after finding out it blocks datacenter egress, which silently
         broke my heartbeat Worker. Cloudflare Tunnel is free, works from anywhere, and keeps the attack
         surface at "one auth-gated hostname per service."
       </p>

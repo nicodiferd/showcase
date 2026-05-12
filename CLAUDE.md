@@ -6,24 +6,24 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is a personal portfolio website for Nicolo DiFerdinando, featuring a multi-theme static website with cybersecurity-focused content. The site is deployed on Netlify at `nicolod.org`.
 
-An alternate **OS-style portfolio** (NicoOS) lives in the `os/` directory — a React-based interactive desktop simulator deployed on Cloudflare Workers at `os.nicolod.org`.
+An alternate **OS-style portfolio** (NicoOS) lives in the `os/` directory. It is a React-based interactive desktop simulator deployed on Cloudflare Workers at `os.nicolod.org`.
 
 ## Development Commands
 
 ```bash
-# Main site — Install dependencies
+# Main site: install dependencies
 npm install
 
-# Main site — Start development server (runs on http://localhost:3000)
+# Main site: start development server (runs on http://localhost:3000)
 npm start
 
-# NicoOS — Install dependencies
+# NicoOS: install dependencies
 cd os && npm install
 
-# NicoOS — Start development server
+# NicoOS: start development server
 cd os && npm run dev
 
-# NicoOS — Build and deploy
+# NicoOS: build and deploy
 cd os && npm run build && npx wrangler deploy
 ```
 
@@ -92,7 +92,7 @@ os/
 
 #### Deployment
 - Cloudflare Workers (static assets) at `os.nicolod.org`
-- Config in `wrangler.jsonc` — route pattern: `os.nicolod.org/*`
+- Config in `wrangler.jsonc` (route pattern: `os.nicolod.org/*`)
 - Also available at `nicoos.nicoloha-mail.workers.dev`
 - Deploy: `cd os && npm run build && npx wrangler deploy`
 
@@ -105,10 +105,14 @@ os/
 5. **Boot skip** - NicoOS stores `nicoos-booted` in sessionStorage to skip boot on refresh
 6. **Window state** - Managed via React Context + useReducer, not persisted across sessions
 
+## Style
+
+- **No em-dashes (—) anywhere in this repo.** Body copy, code comments, docs - everywhere. Use commas, periods, parentheses, or hyphens instead. This applies to user-facing text and developer-facing comments alike.
+
 ## Common Tasks
 
 ### Modifying NicoOS Content
-- App content lives in `os/src/apps/` — each app is a standalone React component
+- App content lives in `os/src/apps/`. Each app is a standalone React component.
 - App registry (icons, filenames, default sizes) is in `os/src/data/apps.ts`
 - Boot messages are in `os/src/components/Boot/BootScreen.tsx`
 - Terminal commands are in `os/src/apps/TerminalApp/TerminalApp.tsx`

@@ -71,7 +71,7 @@ export function TerminalApp() {
         addOutput(HELP);
         break;
       case 'whoami':
-        addOutput('Nicolo DiFerdinando — builder, breaker, figuring it out.');
+        addOutput('Nicolo DiFerdinando :: builder, breaker, figuring it out.');
         break;
       case 'neofetch':
         addOutput(NEOFETCH);
@@ -109,7 +109,7 @@ export function TerminalApp() {
         addOutput(new Date().toString());
         break;
       case 'uname':
-        addOutput('NicoOS v1.0 — builder-23.0 — caffeine-powered');
+        addOutput('NicoOS v1.0 :: builder-23.0 :: caffeine-powered');
         break;
       case 'pwd':
         addOutput('/home/nicolo');

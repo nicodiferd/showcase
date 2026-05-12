@@ -13,7 +13,7 @@ export function BanditApp() {
 
       <div className={s.subheading}>WHAT IT WAS</div>
       <p className={s.text}>
-        Bandit was a student transportation company — an LLC I co-founded to provide safe, reliable rides
+        Bandit was a student transportation company, an LLC I co-founded to provide safe, reliable rides
         for college students in San Luis Obispo. We weren't just building an app; we were trying to build
         a brand that students actually identified with.
       </p>
@@ -57,8 +57,8 @@ export function BanditApp() {
           { date: 'Early 2024', title: 'Formation', text: 'Filed the LLC, assembled the founding team.' },
           { date: 'Spring 2024', title: 'Development', text: 'Built the iOS app, backend infrastructure, and scheduling system.' },
           { date: 'Summer 2024', title: 'Brand & Launch Prep', text: 'Developed brand identity, website, and marketing materials.' },
-          { date: 'Fall 2024', title: 'Operations', text: 'Ran live operations — managing drivers, scheduling, the reality of running a service.' },
-          { date: 'September 2025', title: 'Closure', text: 'Made the decision to wind down. Not a failure — a deliberate choice.' },
+          { date: 'Fall 2024', title: 'Operations', text: 'Ran live operations: managing drivers, scheduling, the reality of running a service.' },
+          { date: 'September 2025', title: 'Closure', text: 'Made the decision to wind down. Not a failure, but a deliberate choice.' },
         ].map((item, i) => (
           <div key={i} className={s.timelineItem}>
             <div className={s.timelineDate}>{item.date}</div>
@@ -78,7 +78,7 @@ export function BanditApp() {
         </div>
         <div className={s.card}>
           <div className={s.cardTitle}>Operations Complexity</div>
-          <div className={s.cardDesc}>The tech was the easy part. Software scales. Operations don't — at least not the same way.</div>
+          <div className={s.cardDesc}>The tech was the easy part. Software scales. Operations don't, at least not the same way.</div>
         </div>
         <div className={s.card}>
           <div className={s.cardTitle}>Knowing When to Stop</div>

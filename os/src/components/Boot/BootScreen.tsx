@@ -6,7 +6,7 @@ interface BootScreenProps {
 }
 
 const bootMessages = [
-  { text: 'NicoOS v1.0 — Personal Operating System', type: 'brand' },
+  { text: 'NicoOS v1.0 :: Personal Operating System', type: 'brand' },
   { text: '========================================', type: 'dim' },
   { text: '', type: 'dim' },
   { text: 'BIOS: Detecting hardware...', type: 'dim' },
